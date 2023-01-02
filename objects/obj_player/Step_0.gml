@@ -1,13 +1,10 @@
-// Player movements
-var playerSpeed = 3;
-image_speed = 0;
+/// @description Player movements
 
 // Left movement
 if keyboard_check(ord("A")) {
-	if (!place_meeting(x - playerSpeed, y, obj_wall)) {
-		x -= playerSpeed;
-		image_index = 2;
-		image_xscale = 1;
+	if (!place_meeting(x - player_speed, y, obj_wall)) {
+		x -= player_speed;
+		image_index = 3;
 	} else {
 		// Move 1 pixel until player is next to wall
         while (!place_meeting(x - 1, y, obj_wall)) {
@@ -18,10 +15,9 @@ if keyboard_check(ord("A")) {
 
 // Right movement
 if keyboard_check(ord("D")) {
-	if (!place_meeting(x + playerSpeed, y, obj_wall)) {
-		x += playerSpeed;
-		image_index = 2;
-		image_xscale = -1;
+	if (!place_meeting(x + player_speed, y, obj_wall)) {
+		x += player_speed;
+		image_index = 1;
 	} else {
 		// Move 1 pixel until player is next to wall
         while (!place_meeting(x + 1, y, obj_wall)) {
@@ -32,8 +28,8 @@ if keyboard_check(ord("D")) {
 
 // Up movement
 if keyboard_check(ord("W")) {
-	if (!place_meeting(x, y - playerSpeed, obj_wall)) {
-		y -= playerSpeed;
+	if (!place_meeting(x, y - player_speed, obj_wall)) {
+		y -= player_speed;
 		image_index = 0;
 	} else {
 		// Move 1 pixel until player is next to wall
@@ -45,9 +41,9 @@ if keyboard_check(ord("W")) {
 
 // Down movement
 if keyboard_check(ord("S")) {
-	if (!place_meeting(x, y + playerSpeed, obj_wall)) {
-		y += playerSpeed;
-		image_index = 1;
+	if (!place_meeting(x, y + player_speed, obj_wall)) {
+		y += player_speed;
+		image_index = 2;
 	} else {
 		// Move 1 pixel until player is next to wall
         while (!place_meeting(x, y + 1, obj_wall)) {

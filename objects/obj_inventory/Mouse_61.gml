@@ -1,4 +1,4 @@
-/// @description
+/// @description Change selected inventory slot
 slot_pos += -1;
 
 if (slot_pos < 0) {

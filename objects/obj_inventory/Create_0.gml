@@ -8,10 +8,14 @@
 
 // Create inventory
 global.inventory = ds_list_create();
-ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-slot_pos = 0;
-slot_hover = 0;
 global.total_slots = 9;
+
+// Starting items for player
+ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+
+// Slot positions
+slot_pos = 0; // Keybinds and mouse scroll
+slot_hover = 0; // Mouse hover over slot
 
 // Viewport positions
 vw = x - sprite_get_xoffset(sprite_index) - sprite_width / 2;
@@ -25,11 +29,11 @@ item_height = 56;
 start_width = 20;
 start_height = 18;
 gap = 8;
-x_pos = 0;
-y_pos = 0;
 text_x_pos = 0;
 text_y_pos = 0;
 gap_between_slots = 0;
+x_pos = 0
+y_pos = 0
 
 // Inventory selector
 selector_start_width = 16;

@@ -1,2 +1,3 @@
 /// @description 
-item = global.items[ITEM.TOAD];
+//item = global.items[ITEM.TOAD];
+item = new Toad();

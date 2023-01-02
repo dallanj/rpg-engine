@@ -1,13 +1,13 @@
 /// @description Draw Inventory HUD
 
 // Draw inventory HUD
-global.inventory_size = ds_list_size(global.inventory);
 draw_sprite(spr_inventory, 0, vw, vh - sprite_height);
 
 // Text colors
 draw_set_color(c_grey);
 draw_set_font(font_inventory);
 
+// Draw inventory selector
 x_pos = selector_start_width + vw;
 y_pos = vh - sprite_height + selector_start_height;
 var selector_gap_between_slots = (slot_pos * 8) + (slot_pos * item_width);
@@ -21,21 +21,25 @@ for (var i = 0; i < global.total_slots; i ++) {
 	draw_text(text_x_pos, text_y_pos, i + 1);
 }
 
-// Iterate through each item
-for (var i = 0; i < global.inventory_size; i ++) {
+// Iterate through each item in inventory
+for (var i = 0; i < global.total_slots; i ++) {
 	// Item data
-	var item = global.inventory[| i];
+	var item = global.inventory_array[i];
+	
+	if (!item) {
+		continue;
+	}
+	
+	var item_slot = item.slot - 1;
 	
 	// Initial slot positions
 	x_pos = start_width + vw;
 	y_pos = vh - sprite_height + start_height;
 	
 	// Slot width calculations
-	gap_between_slots = (i * gap) + (item_width * i);
+	gap_between_slots = (item_slot * gap) + (item_width * item_slot);
 	
 	// Draw each item in slots
-	//instance_create_depth(x_pos + gap_between_slots, y_pos-32, -1000, item.object);
-	//instance_create_layer(x_pos + gap_between_slots, y_pos, "Instances", item.object);
 	draw_sprite(item.sprite, 0, x_pos + gap_between_slots, y_pos);
 	
 	// Draw quantity if item is stackable
@@ -51,7 +55,7 @@ for (var i = 0; i < global.inventory_size; i ++) {
 // Draw tooltip for items within inventory slots
 if (tool_tip) {
 	// Item data
-	var item = global.inventory[| slot_hover];
+	var item = global.inventory_array[slot_hover];
 	
 	// Tooltip dimensions
 	var tooltip_height = sprite_get_height(spr_inv_tooltip);
@@ -72,7 +76,7 @@ if (tool_tip) {
 		
 		// Description of item
 		draw_set_font(font_inventory);
-		DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos + 75, c_black, c_white, string("..."));
+		DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos + 75, c_black, c_white, string(item.slot));
 		
 	}
 }

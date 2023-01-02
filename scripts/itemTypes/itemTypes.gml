@@ -3,11 +3,9 @@ function Toad () : Item () constructor {
 	name = "Toad mushroom";
 	description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 	price = 10;
-	attackPower = 5;
 	sprite = spr_item_toad;
 	object = obj_item_toad;
 	//Effect = function (opponent) {
-	//	opponent.hp -= 10;
 	//}
 }
 
@@ -16,7 +14,6 @@ function Ghost () : Item () constructor {
 	name = "Ghost";
 	description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 	price = 8;
-	attackPower = 3;
 	sprite = spr_item_ghost;
 	object = obj_item_ghost;
 }
@@ -31,7 +28,6 @@ function Shell () : Item () constructor {
 	object = obj_item_shell;
 }
 
-//function Health_Potion () : Potion () constructor {
-//	name = "Health Potion";
-//	hpAdd = 25;
-//}
+function Health_Potion () : Potion () constructor {
+	//
+}

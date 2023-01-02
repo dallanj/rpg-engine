@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "functions",
+  "name": "textController",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
