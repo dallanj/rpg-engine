@@ -1,7 +1,7 @@
 /// @description Draw Inventory HUD
 
 // Draw inventory HUD
-draw_sprite(spr_inventory, 0, vw, vh - sprite_height);
+draw_sprite(spr_inventory, 0, vw, vh);
 
 // Text colors
 draw_set_color(c_grey);
@@ -9,7 +9,7 @@ draw_set_font(font_inventory);
 
 // Draw inventory selector
 x_pos = selector_start_width + vw;
-y_pos = vh - sprite_height + selector_start_height;
+y_pos = vh + selector_start_height;
 var selector_gap_between_slots = (slot_pos * 8) + (slot_pos * item_width);
 draw_sprite(spr_inventory_selected, 0, x_pos + selector_gap_between_slots, y_pos);
 
@@ -34,7 +34,7 @@ for (var i = 0; i < global.total_slots; i ++) {
 	
 	// Initial slot positions
 	x_pos = start_width + vw;
-	y_pos = vh - sprite_height + start_height;
+	y_pos = vh + start_height;
 	
 	// Slot width calculations
 	gap_between_slots = (item_slot * gap) + (item_width * item_slot);

@@ -4,10 +4,12 @@
   "name": "GameJam",
   "resources": [
     {"id":{"name":"obj_item_ghost","path":"objects/obj_item_ghost/obj_item_ghost.yy",},"order":0,},
+    {"id":{"name":"spr_hud","path":"sprites/spr_hud/spr_hud.yy",},"order":0,},
     {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},"order":1,},
     {"id":{"name":"spr_inv_tooltip","path":"sprites/spr_inv_tooltip/spr_inv_tooltip.yy",},"order":0,},
     {"id":{"name":"textController","path":"scripts/textController/textController.yy",},"order":7,},
     {"id":{"name":"obj_inventory","path":"objects/obj_inventory/obj_inventory.yy",},"order":8,},
+    {"id":{"name":"hudController","path":"scripts/hudController/hudController.yy",},"order":0,},
     {"id":{"name":"spr_item_toad","path":"sprites/spr_item_toad/spr_item_toad.yy",},"order":2,},
     {"id":{"name":"obj_item_shell","path":"objects/obj_item_shell/obj_item_shell.yy",},"order":1,},
     {"id":{"name":"itemController","path":"scripts/itemController/itemController.yy",},"order":1,},
@@ -19,6 +21,7 @@
     {"id":{"name":"spr_inventory_selected","path":"sprites/spr_inventory_selected/spr_inventory_selected.yy",},"order":2,},
     {"id":{"name":"spr_item_ghost","path":"sprites/spr_item_ghost/spr_item_ghost.yy",},"order":0,},
     {"id":{"name":"spr_inventory","path":"sprites/spr_inventory/spr_inventory.yy",},"order":1,},
+    {"id":{"name":"obj_hud","path":"objects/obj_hud/obj_hud.yy",},"order":10,},
     {"id":{"name":"obj_game_controller","path":"objects/obj_game_controller/obj_game_controller.yy",},"order":6,},
     {"id":{"name":"obj_warpTo","path":"objects/obj_warpTo/obj_warpTo.yy",},"order":2,},
     {"id":{"name":"spr_wall","path":"sprites/spr_wall/spr_wall.yy",},"order":5,},
@@ -31,6 +34,7 @@
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":0,},
     {"id":{"name":"font_inventory","path":"fonts/font_inventory/font_inventory.yy",},"order":1,},
     {"id":{"name":"itemTypes","path":"scripts/itemTypes/itemTypes.yy",},"order":3,},
+    {"id":{"name":"font_hud","path":"fonts/font_hud/font_hud.yy",},"order":2,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [
@@ -70,6 +74,8 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Inventory","folderPath":"folders/Sprites/Inventory.yy","order":17,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Items","folderPath":"folders/Sprites/Items.yy","order":18,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Items","folderPath":"folders/Scripts/Items.yy","order":6,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"HUD","folderPath":"folders/Sprites/HUD.yy","order":19,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"HUD","folderPath":"folders/Scripts/HUD.yy","order":8,},
   ],
   "AudioGroups": [
     {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
