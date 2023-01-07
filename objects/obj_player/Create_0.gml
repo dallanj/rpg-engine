@@ -1,4 +1,10 @@
 /// @description Variables
-player_speed = 3;
-image_speed = 0;
-image_index = 2;
+player = new Player();
+
+//image_speed = player.state.Fps;
+//image_index = player.state.sprites[0];
+
+// State
+this = generateStateMemory();
+this.addState(State.idle, characterStateIdle, "idle");
+this.addState(State.walk, characterStateWalk, "walk");

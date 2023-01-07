@@ -34,8 +34,8 @@ gap = 8;
 text_x_pos = 0;
 text_y_pos = 0;
 gap_between_slots = 0;
-x_pos = 0
-y_pos = 0
+x_pos = 0;
+y_pos = 0;
 
 // Inventory selector
 selector_start_width = 16;

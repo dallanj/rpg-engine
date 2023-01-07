@@ -15,3 +15,22 @@ function DrawTextOutlined(xx, yy, outline_color, string_color, string) {
 	draw_set_color(string_color);
 	draw_text(xx, yy, string);
 }
+
+player = {
+    north: {
+		key: keyboard_check(ord("W")),
+		indexes: [12, 13, 14, 15]
+	},
+    east: {
+		key: keyboard_check(ord("A")),
+		indexes: [8, 9, 10, 11]
+	},
+	south: {
+		key: keyboard_check(ord("S")),
+		indexes: [0, 1, 2, 3]
+	},
+	west: {
+		key: keyboard_check(ord("D")),
+		indexes: [4, 5, 6, 7]
+	}
+};

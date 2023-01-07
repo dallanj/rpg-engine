@@ -15,11 +15,15 @@ for (var i = 0; i < global.total_slots; i ++) {
 	
 	var item_slot = item.slot - 1;
 	
+	// Initial slot positions
+	x_pos = start_width + vw;
+	y_pos = vh + start_height;
+	
 	// Slot width calculations
 	gap_between_slots = (item_slot * gap) + (item_width * item_slot);
 	
 	// Detect if cursor is hovering over a slot
-	if point_in_rectangle(mouse_x, mouse_y, x_pos + gap_between_slots, y_pos, x_pos + gap_between_slots + item_width, y_pos + item_height) {
+	if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), x_pos + gap_between_slots, y_pos, x_pos + gap_between_slots + item_width, y_pos + item_height) {
 		slot_hover = item_slot;
 	    // Set hover tooltip to true
 		tool_tip = true;
