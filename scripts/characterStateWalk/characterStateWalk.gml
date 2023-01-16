@@ -17,12 +17,10 @@ function characterStateWalk(event, stateLayer) {
 			var characterSpeed = self.player.walkingSpeed;
 			var characterImageSpeed = self.player.walkingImageSpeed;
 			var characterControls = self.player.controls;
-			var characterSprites = self.player.sprites;
 			var characterFrames = self.player.frames;
-			var activeKeys = self.player.keys;
 			
 			// Update current active keys
-			characterSprites = characterUpdateKeys(characterControls, activeKeys, characterFrames, characterSprites);
+			self.player.sprites = characterUpdateKeys(characterControls, self.player.keys, characterFrames, self.player.sprites);
 			
 			// Adjust character speeds if walking or running
 			if (characterCheckKeys(characterControls)) {
@@ -36,7 +34,7 @@ function characterStateWalk(event, stateLayer) {
 			}
 			
 			// Loop through sprite image indexes in players state
-			characterAnimation(characterSprites, characterImageSpeed);
+			characterAnimation(self.player.sprites, characterImageSpeed);
 			
 			// Left movement
 			if characterKeyboard("A") {
@@ -62,7 +60,7 @@ function characterStateWalk(event, stateLayer) {
 			// If character is not moving or position is not clear
 			if (!position_free || !characterCheckKeys(characterControls)) {
 				// Clear active keys
-				activeKeys = [];
+				self.player.keys = [];
 				
 				// Switch character to idle state
 				stateLayer.switchState(State.idle);	
