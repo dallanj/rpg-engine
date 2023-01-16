@@ -10,7 +10,7 @@ function characterStateIdle(event, stateLayer) {
 		case StateMemoryEvent.Enter:
 			if (stateLayer.isNewState) {
 				image_speed = 0;
-				image_index = self.player.state.sprites[0];
+				image_index = self.player.sprites[0];
 				show_debug_message("begin idle state");
 			}
 		break;
@@ -20,7 +20,7 @@ function characterStateIdle(event, stateLayer) {
 			}
 		break;
 		case StateMemoryEvent.DrawGui:
-			characterDrawGui(self.player.state, stateLayer);
+			characterDrawGui(self.player, stateLayer);
 		break;
 	};
 }

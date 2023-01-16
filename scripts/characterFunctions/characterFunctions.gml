@@ -211,8 +211,7 @@ function characterDrawGui(state, stateLayer) {
 	draw_text(20,20,string_hash_to_newline("State: "+string(stateLayer.activeState.name)
         +"#previous: "+string(stateLayer.previousState.name)
 		+"#keys: "+string(state.keys)
-		+"#sprites: "+string(state.sprites)
-		+"#player_speed: "+string(state.Speed))
+		+"#sprites: "+string(state.sprites))
     );
 	
 	return;
