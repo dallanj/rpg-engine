@@ -58,6 +58,8 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_6A980C49","properties":[],"isDnd":false,"objectId":{"name":"obj_item_toad","path":"objects/obj_item_toad/obj_item_toad.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":544.0,"y":640.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_6947A35B","properties":[],"isDnd":false,"objectId":{"name":"obj_item_toad","path":"objects/obj_item_toad/obj_item_toad.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":576.0,"y":672.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_48A034C7","properties":[],"isDnd":false,"objectId":{"name":"obj_item_toad","path":"objects/obj_item_toad/obj_item_toad.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":608.0,"y":704.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_1465B07A","properties":[],"isDnd":false,"objectId":{"name":"obj_npc_sarah","path":"objects/obj_npc_sarah/obj_npc_sarah.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":672.0,"y":576.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_3D579C7","properties":[],"isDnd":false,"objectId":{"name":"obj_npc_bob","path":"objects/obj_npc_bob/obj_npc_bob.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":544.0,"y":576.0,},
       ],"visible":true,"depth":0,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritVisibility":true,"inheritSubLayers":true,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"effectEnabled":true,"effectType":null,"properties":[],},
     {"resourceType":"GMRTileLayer","resourceVersion":"1.1","name":"Tiles_2","tilesetId":{"name":"tile_set_2","path":"tilesets/tile_set_2/tile_set_2.yy",},"x":0,"y":0,"tiles":{"TileDataFormat":1,"SerialiseWidth":60,"SerialiseHeight":34,"TileCompressedData":[
 -502,-2147483648,1,0,-5,-2147483648,2,12,13,-52,-2147483648,2,12,13,-4,-2147483648,2,40,41,-48,-2147483648,6,4,5,6,7,40,41,-4,-2147483648,2,68,69,-48,-2147483648,6,32,33,34,35,68,69,-4,-2147483648,2,96,97,-48,-2147483648,6,60,61,62,63,96,97,-54,-2147483648,4,88,
@@ -115,6 +117,8 @@
     {"name":"inst_6A980C49","path":"rooms/world_test/world_test.yy",},
     {"name":"inst_6947A35B","path":"rooms/world_test/world_test.yy",},
     {"name":"inst_48A034C7","path":"rooms/world_test/world_test.yy",},
+    {"name":"inst_1465B07A","path":"rooms/world_test/world_test.yy",},
+    {"name":"inst_3D579C7","path":"rooms/world_test/world_test.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,

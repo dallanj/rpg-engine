@@ -80,7 +80,7 @@ function characterAnimation(sprites, index_speed) {
 		image_index = sprites[0];
 	} else {
 		image_speed = index_speed;
-		if (image_index > sprites[array_length(sprites) - 1] || image_index < sprites[0]) {
+		if (round(image_index) > sprites[array_length(sprites) - 1] || round(image_index) < sprites[0]) {
 			image_index = sprites[0];
 		}
 	}

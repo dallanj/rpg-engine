@@ -1,5 +1,4 @@
 enum State {
 	idle,
-	walk,
-	run
+	walk
 }
