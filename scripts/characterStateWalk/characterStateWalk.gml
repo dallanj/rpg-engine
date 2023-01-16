@@ -8,118 +8,67 @@
 function characterStateWalk(event, stateLayer) {
 	switch (event) {
 		case StateMemoryEvent.Enter:
-		
-		// NOTES
-		
-		// PLAYER STRUCT SHOULD ONLY CONTAIN SPRITE DATA, CONTROLS
-			// Update active keys state
-			self.player.updateKeys(keyboard_lastkey);
-			// Remove image speed and reset image index to first index in the state
-			if (image_speed != self.player.state.Fps) {
-				image_speed = self.player.state.Fps;
-				image_index = self.player.state.sprites[0];
+			if (stateLayer.isNewState) {
+				show_debug_message("begin walking state");
 			}
 		break;
 		case StateMemoryEvent.Step:
-			// Left movement
-			if self.player.keyboard("A") {
-				changeImageIndex("A");
-	
-				if (!place_meeting(x - self.player.state.Speed, y, obj_wall)
-					&& !place_meeting(x - self.player.state.Speed, y, obj_boundry_x)
-					&& !place_meeting(x - self.player.state.Speed, y, obj_boundry_y)
-				) {
-					x -= self.player.state.Speed;
+			var position_free = true;
+			var characterSpeed = self.player.walkingSpeed;
+			var characterImageSpeed = self.player.walkingImageSpeed;
+			var characterControls = self.player.controls;
+			var characterFrames = self.player.frames;
+			
+			// Update current active keys
+			self.player.sprites = characterUpdateKeys(characterControls, self.player.keys, characterFrames, self.player.sprites);
+			
+			// Adjust character speeds if walking or running
+			if (characterCheckKeys(characterControls)) {
+				if (keyboard_check(vk_shift)) {
+					characterSpeed = self.player.runningSpeed;
+					characterImageSpeed = self.player.runningImageSpeed;
 				} else {
-					// Move 1 pixel until player is next to wall
-			        while (!place_meeting(x - 1, y, obj_wall)
-						&& !place_meeting(x - 1, y, obj_boundry_x)
-						&& !place_meeting(x - 1, y, obj_boundry_y)
-					) {
-			            x--;
-			        }
+					characterSpeed = self.player.walkingSpeed;
+					characterImageSpeed = self.player.walkingImageSpeed;
 				}
+			}
+			
+			// Loop through sprite image indexes in players state
+			characterAnimation(self.player.sprites, characterImageSpeed);
+			
+			// Left movement
+			if characterKeyboard("A") {
+				position_free = characterMovement(sign(characterSpeed * -1), characterSpeed * -1, obj_wall);
 			}
 
 			// Right movement
-			if self.player.keyboard("D") {
-				changeImageIndex("D");
-	
-				if (!place_meeting(x + self.player.state.Speed, y, obj_wall)
-					&& !place_meeting(x + self.player.state.Speed, y, obj_boundry_x)
-					&& !place_meeting(x + self.player.state.Speed, y, obj_boundry_y)
-				) {
-					x += self.player.state.Speed;
-				} else {
-					// Move 1 pixel until player is next to wall
-			        while (!place_meeting(x + 1, y, obj_wall)
-						&& !place_meeting(x + 1, y, obj_boundry_x)
-						&& !place_meeting(x + 1, y, obj_boundry_y)
-					) {
-			            x++;
-			        }
-				}
+			if characterKeyboard("D") {
+				position_free = characterMovement(sign(characterSpeed), characterSpeed, obj_wall);
 			}
 
 			// Up movement
-			if self.player.keyboard("W") {
-				changeImageIndex("W");
-	
-				if (!place_meeting(x, y - self.player.state.Speed, obj_wall)
-					&& !place_meeting(x, y - self.player.state.Speed, obj_boundry_x)
-					&& !place_meeting(x, y - self.player.state.Speed, obj_boundry_y)
-				) {
-					y -= self.player.state.Speed;
-				} else {
-					// Move 1 pixel until player is next to wall
-			        while (!place_meeting(x, y - 1, obj_wall)
-			            && !place_meeting(x, y - 1, obj_boundry_x)
-						&& !place_meeting(x, y - 1, obj_boundry_y)
-					) {
-						y --;
-			        }
-				}
+			if characterKeyboard("W") {
+				position_free = characterMovement(sign(characterSpeed * -1), characterSpeed * -1, obj_wall, true);
 			}
 
 			// Down movement
-			if self.player.keyboard("S") {
-				changeImageIndex("S");
-	
-				if (!place_meeting(x, y + self.player.state.Speed, obj_wall)
-					&& !place_meeting(x, y + self.player.state.Speed, obj_boundry_x)
-					&& !place_meeting(x, y + self.player.state.Speed, obj_boundry_y)
-				) {
-					y += self.player.state.Speed;
-				} else {
-					// Move 1 pixel until player is next to wall
-			        while (!place_meeting(x, y + 1, obj_wall)
-						&& !place_meeting(x, y + 1, obj_boundry_x)
-						&& !place_meeting(x, y + 1, obj_boundry_y)) {
-						y ++;
-					}
-				}
+			if characterKeyboard("S") {
+				position_free = characterMovement(sign(characterSpeed), characterSpeed, obj_wall, true);
 			}
-
-			// Plays specified list of image indexes
-			function changeImageIndex(key) {
-	
-				// Play sprite animations if the key is currently active and walking is allowed
-				if (self.player.walking(key)) {
-					// Loop through sprite image indexes in players state
-					if (image_index > self.player.state.sprites[array_length(self.player.state.sprites) - 1] || image_index < self.player.state.sprites[0]) {
-						image_index = self.player.state.sprites[0];
-				    }
-				}
+		
+			
+			// If character is not moving or position is not clear
+			if (!position_free || !characterCheckKeys(characterControls)) {
+				// Clear active keys
+				self.player.keys = [];
+				
+				// Switch character to idle state
+				stateLayer.switchState(State.idle);	
 			}
 
 		break;
 		case StateMemoryEvent.DrawGui:
-			draw_set_color(c_white);
-			draw_text(20,20,string_hash_to_newline("State: "+string(stateLayer.activeState)
-              +"#previous: "+string(stateLayer.previousState))
-         );
+			characterDrawGui(self.player, stateLayer);
 		break;
-		//default:
-			//
 	};
 }

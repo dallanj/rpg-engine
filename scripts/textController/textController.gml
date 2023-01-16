@@ -1,5 +1,17 @@
-// Draw text with an outline
+/**
+* Draws text with an outline
+*
+* @param xx (int)
+* @param yy (int)
+* @param outline_color (int)
+* @param string_color (int)
+* @param string (string)
+*
+* @return void
+*/
 function DrawTextOutlined(xx, yy, outline_color, string_color, string) {
+	draw_set_font(font_inventory);
+	
 	// Outline
 	draw_set_color(outline_color);
 	draw_text(xx+1, yy+1, string);
@@ -14,23 +26,6 @@ function DrawTextOutlined(xx, yy, outline_color, string_color, string) {
 	// Text
 	draw_set_color(string_color);
 	draw_text(xx, yy, string);
+	
+	return;
 }
-
-player = {
-    north: {
-		key: keyboard_check(ord("W")),
-		indexes: [12, 13, 14, 15]
-	},
-    east: {
-		key: keyboard_check(ord("A")),
-		indexes: [8, 9, 10, 11]
-	},
-	south: {
-		key: keyboard_check(ord("S")),
-		indexes: [0, 1, 2, 3]
-	},
-	west: {
-		key: keyboard_check(ord("D")),
-		indexes: [4, 5, 6, 7]
-	}
-};

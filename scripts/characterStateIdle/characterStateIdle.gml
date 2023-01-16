@@ -8,22 +8,19 @@
 function characterStateIdle(event, stateLayer) {
 	switch (event) {
 		case StateMemoryEvent.Enter:
-			image_speed = player.state.Fps;
-			image_index = player.state.sprites[0];
+			if (stateLayer.isNewState) {
+				image_speed = 0;
+				image_index = self.player.sprites[0];
+				show_debug_message("begin idle state");
+			}
 		break;
 		case StateMemoryEvent.Step:
-			if (keyboard_check_pressed(vk_anykey)) {
+			if (characterCheckKeys(self.player.controls)) {
 				stateLayer.switchState(State.walk);
 			}
+		break;
 		case StateMemoryEvent.DrawGui:
-			draw_set_color(c_white);
-			draw_text(20,20,string_hash_to_newline("State: "+string(stateLayer.activeState)
-              +"#previous: "+string(stateLayer.previousState))
-         );
+			characterDrawGui(self.player, stateLayer);
 		break;
-		case StateMemoryEvent.Exit:
-			exit;
-		break;
-			//
 	};
 }

@@ -10,14 +10,14 @@ draw_set_font(font_inventory);
 // Draw inventory selector
 x_pos = selector_start_width + vw;
 y_pos = vh + selector_start_height;
-var selector_gap_between_slots = (slot_pos * 8) + (slot_pos * item_width);
+var selector_gap_between_slots = (slot_pos * gap) + (slot_pos * item_width);
 draw_sprite(spr_inventory_selected, 0, x_pos + selector_gap_between_slots, y_pos);
 
 // Draw slot keybinds
 for (var i = 0; i < global.total_slots; i ++) {
 	gap_between_slots = (i * gap) + (item_width * i);
 	text_x_pos = x_pos + gap_between_slots;
-	text_y_pos = y_pos - 4;
+	text_y_pos = y_pos - 2; // 4
 	draw_text(text_x_pos, text_y_pos, i + 1);
 }
 
@@ -45,7 +45,7 @@ for (var i = 0; i < global.total_slots; i ++) {
 	// Draw quantity if item is stackable
 	if (item.stackable) {
 		text_x_pos = x_pos + gap_between_slots + item_width - gap;
-		text_y_pos = y_pos + (item_height / 2) + 10;
+		text_y_pos = y_pos + (item_height / 2) + 4; // 10
 		
 		// Item quantity
 		DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, item.quantity);

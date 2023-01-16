@@ -24,7 +24,7 @@ function generateStateMemory(activeState = undefined) {
 	
 	// For basic state memories
 	if (activeState != undefined) {
-		stateLayer.generateState(activeState);
+		stateLayer.addState(activeState);
 	}
 	
 	return stateLayer;
@@ -43,6 +43,7 @@ function generateStateLayer() constructor {
 	originalState = undefined;
 	previousState = undefined;
 	nextState = undefined;
+	isNewState = true;
 	
 	stateStack = ds_stack_create();
 	
@@ -115,6 +116,7 @@ function generateStateLayer() constructor {
 		if (activeState != state) {
 			ds_stack_push(stateStack, state);
 			nextState = state;
+			isNewState = true;
 		}
 		
 		// Lock the state from being switched
@@ -130,6 +132,7 @@ function generateStateLayer() constructor {
 		if (stateSwitchIsLocked) return;
 		
 		stateShouldReset = true;
+		isNewState = true;
 	}
 	
 	/**
@@ -143,6 +146,7 @@ function generateStateLayer() constructor {
 		// Switch to original state if stack is empty
 		if (!ds_size_size(stateStack)) {
 			switchState(originalState.id);
+			isNewState = true;
 			return;
 		}
 		
@@ -151,6 +155,7 @@ function generateStateLayer() constructor {
 		stateSwitchIsLocked = true;
 		
 		// Switch the state to the first state found within the stack
+		isNewState = true;
 		switchState(ds_stack_top(stateStack));
 	}
 	
@@ -186,6 +191,7 @@ function generateStateLayer() constructor {
 		
 		// Set active state to original state if there is not an active state
 		if (state == undefined) {
+			isNewState = true;
 			activeState = originalState;
 			event(StateMemoryEvent.Enter);
 			return;
@@ -196,14 +202,19 @@ function generateStateLayer() constructor {
 				stateSwitchIsLocked = false;
 				stateTimer ++;
 				
-				if (nextState == activeState && !stateShouldReset) return;
+				if (nextState == activeState && !stateShouldReset) {
+					isNewState = false;
+					return;
+				}
 				
 				stateShouldReset = false;
 				
 				var stateFunction = activeState.func;
 				
 				with (instanceOwner) {
-					if (stateFunction != undefined) stateFunction(StateMemoryEvent.Exit, other);	
+					if (stateFunction != undefined) {
+						stateFunction(StateMemoryEvent.Exit, other);
+					}
 				}
 				
 				previousState = activeState;
@@ -214,25 +225,17 @@ function generateStateLayer() constructor {
 				
 				stateFunction = activeState.func;
 				with (instanceOwner) {
-					if (stateFunction != undefined) stateFunction(StateMemoryEvent.Enter, other);	
+					isNewState = true;
+					stateFunction(StateMemoryEvent.Enter, other);
 				}
 				return;
 			break;
-			case StateMemoryEvent.Enter:
-				var stateFunction = activeState.func;
-				with (instanceOwner) {
-					stateFunction(event, other);
-				}
-				return;
-			break;
-			case StateMemoryEvent.Step:
-			case StateMemoryEvent.DrawGui:
-				var stateFunction = activeState.func;
-				with (instanceOwner) {
-					stateFunction(event, other);
-				}
-			break;
-				
+			default:
+		        var stateFunction = activeState.func;
+		        with(instanceOwner) {
+					stateFunction(event, other); 
+		        }
+		    break;	
 		}
 	}
 }
