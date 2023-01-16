@@ -20,7 +20,7 @@ function characterStateIdle(event, stateLayer) {
 			}
 		break;
 		case StateMemoryEvent.DrawGui:
-			characterDrawGui();
+			characterDrawGui(self.player.state, stateLayer);
 		break;
 	};
 }

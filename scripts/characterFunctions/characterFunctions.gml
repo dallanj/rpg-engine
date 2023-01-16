@@ -99,18 +99,31 @@ function characterAnimation(sprites, index_speed) {
 * @return boolean
 */
 function characterMovement(pos, spd, object, vertical = false) {
-	// UNFINISHED GLITCH FIX
-	if (!place_meeting(x, y + (pos * (spd * sign(spd))), object) || !place_meeting(x + (pos * (spd * sign(spd))), y, object)) {
-		if vertical y += spd else x += spd;
+	var position_free = true;
+	
+	if (vertical) {
+		if (!place_meeting(x, y + (pos * (spd * sign(spd))), object)) {
+			y += spd;
+		} else {
+			// Move 1 pixel until player is next to wall
+			while (!place_meeting(x, y + pos, object)) {
+				y += pos;
+			}
+			position_free = false;
+		}
 	} else {
-		// Move 1 pixel until player is next to wall
-		while (!place_meeting(x, y + pos, object) || !place_meeting(x + pos, y, object)) {
-			//y += pos;
-			if vertical y += pos else x += pos;
+		if (!place_meeting(x + (pos * (spd * sign(spd))), y, object)) {
+			x += spd;
+		} else {
+			// Move 1 pixel until player is next to wall
+			while (!place_meeting(x + pos, y, object)) {
+				x += pos;
+			}
+			position_free = false;
 		}
 	}
 	
-	return;
+	return position_free;
 }
 
 /**
@@ -188,15 +201,18 @@ function characterUpdateKeys(keys, active_keys, frames, sprites) {
 /**
 * Draw character state for testing only
 *
+* @param state (struct)
+* @param stateLayer (struct)
+*
 * @return void
 */
-function characterDrawGui() {
+function characterDrawGui(state, stateLayer) {
 	draw_set_color(c_white);
 	draw_text(20,20,string_hash_to_newline("State: "+string(stateLayer.activeState.name)
         +"#previous: "+string(stateLayer.previousState.name)
-		+"#keys: "+string(self.player.state.keys)
-		+"#sprites: "+string(self.player.state.sprites)
-		+"#player_speed: "+string(self.player.state.Speed))
+		+"#keys: "+string(state.keys)
+		+"#sprites: "+string(state.sprites)
+		+"#player_speed: "+string(state.Speed))
     );
 	
 	return;

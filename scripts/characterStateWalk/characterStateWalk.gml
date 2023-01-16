@@ -19,38 +19,41 @@ function characterStateWalk(event, stateLayer) {
 			// Loop through sprite image indexes in players state
 			characterAnimation(self.player.state.sprites, self.player.Fps);
 			
-			// If character is not moving
-			if (!characterCheckKeys(self.player.controls)) {
+			var position_free = true;
+			
+			// Left movement
+			if characterKeyboard("A") {
+				position_free = characterMovement(sign(self.player.state.Speed * -1), self.player.state.Speed * -1, obj_wall);
+			}
+
+			// Right movement
+			if characterKeyboard("D") {
+				position_free = characterMovement(sign(self.player.state.Speed), self.player.state.Speed, obj_wall);
+			}
+
+			// Up movement
+			if characterKeyboard("W") {
+				position_free = characterMovement(sign(self.player.state.Speed * -1), self.player.state.Speed * -1, obj_wall, true);
+			}
+
+			// Down movement
+			if characterKeyboard("S") {
+				position_free = characterMovement(sign(self.player.state.Speed), self.player.state.Speed, obj_wall, true);
+			}
+		
+			
+			// If character is not moving or position is not clear
+			if (!position_free || !characterCheckKeys(self.player.controls)) {
 				// Clear active keys
 				self.player.state.keys = [];
 				
 				// Switch character to idle state
 				stateLayer.switchState(State.idle);	
 			}
-			
-			// Left movement
-			if characterKeyboard("A") {
-				characterMovement(sign(self.player.state.Speed * -1), self.player.state.Speed * -1, obj_wall);
-			}
-
-			// Right movement
-			if characterKeyboard("D") {
-				characterMovement(sign(self.player.state.Speed), self.player.state.Speed, obj_wall);
-			}
-
-			// Up movement
-			if characterKeyboard("W") {
-				characterMovement(sign(self.player.state.Speed * -1), self.player.state.Speed * -1, obj_wall, true);
-			}
-
-			// Down movement
-			if characterKeyboard("S") {
-				characterMovement(sign(self.player.state.Speed), self.player.state.Speed, obj_wall, true);
-			}
 
 		break;
 		case StateMemoryEvent.DrawGui:
-			characterDrawGui();
+			characterDrawGui(self.player.state, stateLayer);
 		break;
 	};
 }

@@ -11,11 +11,10 @@ this.addState(State.walk, characterStateWalk, "walk");
 //this.addState(State.walk, characterStateWalk, "dialog");
 
 /* Actions
-* W,A,S,D
+* W,A,S,D (done)
 * SHIFT (run)
 * SPACE (interact)
-* G (drop item)
-* E (enter buildings)
+* G (drop item) (done)
 * C (combine items)
 */
 this.event(StateMemoryEvent.Enter);
