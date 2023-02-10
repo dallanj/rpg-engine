@@ -1,7 +1,7 @@
 /// @description Draw Inventory HUD
 
 // Draw inventory HUD
-draw_sprite(spr_inventory, 0, vw, vh);
+draw_sprite_ext(spr_inventory, 0, vw, vh, 1, 1, 0, -1, 0.5);
 
 // Text colors
 draw_set_color(c_grey);
@@ -40,7 +40,7 @@ for (var i = 0; i < global.total_slots; i ++) {
 	gap_between_slots = (item_slot * gap) + (item_width * item_slot);
 	
 	// Draw each item in slots
-	draw_sprite(item.sprite, 0, x_pos + gap_between_slots, y_pos);
+	draw_sprite(item.inv_sprite, 0, x_pos + gap_between_slots, y_pos);
 	
 	// Draw quantity if item is stackable
 	if (item.stackable) {

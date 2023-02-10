@@ -2,6 +2,7 @@ dialog_scale = 0.4;
 character_scale = 0.5;
 
 dialog_width = sprite_get_width(spr_dialog_box) * dialog_scale;
+dialog_height = sprite_get_height(spr_dialog_box) * dialog_scale;
 vw = view_xport[0] + view_wport[0] / 2;
 vh = view_yport[0] + view_hport[0] / 2;
 

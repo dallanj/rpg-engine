@@ -20,17 +20,19 @@ slot_pos = 0; // Keybinds and mouse scroll
 slot_hover = 0; // Mouse hover over slot
 
 // Viewport positions
-vw = (camera_get_view_width(view_camera[0]) / 2) - inventory_width / 2;
-vh = camera_get_view_height(view_camera[0]) - inventory_height;
+//vw = (camera_get_view_width(view_camera[0]) / 2) - inventory_width / 2;
+//vh = camera_get_view_height(view_camera[0]) - inventory_height;
+vw = (view_xport[0] + view_wport[0] / 2) - (inventory_width / 2);
+vh = view_yport[0] + view_hport[0] / 2 - 250;
 
 // Item sprite dimensions
-item_width = 18; // 56
-item_height = 18; //56
+item_width = 56; // 56
+item_height = 56; //56
 
 // Inventory HUD sprite starting positions (PX)
-start_width = 7; // 20
-start_height = 7; // 18
-gap = 4; // 8
+start_width = 20; // 20
+start_height = 18; // 18
+gap = 8; // 8
 text_x_pos = 0;
 text_y_pos = 0;
 gap_between_slots = 0;
@@ -38,8 +40,8 @@ x_pos = 0;
 y_pos = 0;
 
 // Inventory selector
-selector_start_width = 5; // 16
-selector_start_height = 5; // 15
+selector_start_width = 16; // 16
+selector_start_height = 15; // 15
 
 // Hover tooltip
 tool_tip = false;
