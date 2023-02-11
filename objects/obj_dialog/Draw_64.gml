@@ -48,3 +48,4 @@ if (dialog_alpha >= max_alph) {
 //		//opacity = 0;
 //	}
 //}
+//draw_rectangle(vw  + (dialog_width / 2) - 75, vh + 285,  vw  + (dialog_width / 2) - 40, (vh + 285) + 30, true)

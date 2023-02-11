@@ -18,7 +18,7 @@ vh = view_yport[0] + view_hport[0] / 2;
 // Type writer text
 test[0] = "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 text_current = 0;
-text_last = 1;
+text_last = 0;
 text_width = 300;
 text_x = vw  - (dialog_width / 2) + 80;
 text_y = vh + 170;
