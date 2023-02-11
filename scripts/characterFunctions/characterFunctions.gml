@@ -102,21 +102,33 @@ function characterMovement(pos, spd, object, vertical = false) {
 	var position_free = true;
 	
 	if (vertical) {
-		if (!place_meeting(x, y + (pos * (spd * sign(spd))), object)) {
+		if (
+			!place_meeting(x, y + (pos * (spd * sign(spd))), object)
+			&& !place_meeting(x, y + (pos * (spd * sign(spd))), obj_npc_controller)
+		) {
 			y += spd;
 		} else {
 			// Move 1 pixel until player is next to wall
-			while (!place_meeting(x, y + pos, object)) {
+			while (
+				!place_meeting(x, y + pos, object)
+				&& !place_meeting(x, y + pos, obj_npc_controller)
+			) {
 				y += pos;
 			}
 			position_free = false;
 		}
 	} else {
-		if (!place_meeting(x + (pos * (spd * sign(spd))), y, object)) {
+		if (
+			!place_meeting(x + (pos * (spd * sign(spd))), y, object)
+			&& !place_meeting(x + (pos * (spd * sign(spd))), y, obj_npc_controller)
+		) {
 			x += spd;
 		} else {
 			// Move 1 pixel until player is next to wall
-			while (!place_meeting(x + pos, y, object)) {
+			while (
+				!place_meeting(x + pos, y, object)
+				&& !place_meeting(x + pos, y, obj_npc_controller)
+			) {
 				x += pos;
 			}
 			position_free = false;

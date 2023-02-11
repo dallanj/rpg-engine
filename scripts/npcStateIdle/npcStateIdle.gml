@@ -15,10 +15,22 @@ function npcStateIdle(event, stateLayer) {
 			}
 		break;
 		case StateMemoryEvent.Step:
-			//
+		
+			// Dialog box
+			if (distance_to_object(obj_player) < 5) {
+				if (keyboard_check_pressed(vk_space)) {
+					if (!instance_exists(obj_dialog)) {	
+						instance_create_layer(x, y, "dialog", obj_dialog);
+					}
+				}
+			} else {
+				if (instance_exists(obj_dialog)) {
+					instance_destroy(obj_dialog);
+				}
+			}
 		break;
 		case StateMemoryEvent.DrawGui:
-			//
+			//draw_text(200,100,"dialog box = " + string(dialog_toggle));
 		break;
 	};
 }

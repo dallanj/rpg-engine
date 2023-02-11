@@ -18,10 +18,6 @@ function characterStateIdle(event, stateLayer) {
 			if (characterCheckKeys(self.player.controls)) {
 				stateLayer.switchState(State.walk);
 			}
-			
-			if (keyboard_check_pressed(vk_space)) {
-				show_message("space clicked");
-			}
 		break;
 		case StateMemoryEvent.DrawGui:
 			characterDrawGui(self.player, stateLayer);
