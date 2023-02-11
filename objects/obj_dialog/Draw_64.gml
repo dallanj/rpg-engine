@@ -7,13 +7,23 @@ if (has_right_character) {
 draw_sprite_ext(spr_dialog_daniel, 0, vw + 160, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
 
 // Draw dialog box
-draw_sprite_ext(spr_dialog_box, 0, vw  - (dialog_width / 2), vh + 100, dialog_scale, dialog_scale, 0, -1, dialog_alpha);
-draw_sprite_ext(spr_dialog_name_tag, 0, vw  - (dialog_width / 2) + 70, vh + 95, 0.75, 0.75, 0, -1, dialog_alpha);
+if (data[text_current][1] == "right") {
+	draw_sprite_ext(spr_dialog_box, 0, vw  - (dialog_width / 2), vh + 100, dialog_scale, dialog_scale, 0, -1, dialog_alpha);	
+	draw_sprite_ext(spr_dialog_name_tag, 0, vw  - (dialog_width / 2) + 70, vh + 95, 0.75, 0.75, 0, -1, dialog_alpha);
+} else {
+	draw_sprite_ext(spr_dialog_box_left, 0, vw  - (dialog_width / 2), vh + 100, dialog_scale, dialog_scale, 0, -1, dialog_alpha);
+	draw_sprite_ext(spr_dialog_name_tag, 0, vw + 150, vh + 95, 0.75, 0.75, 0, -1, dialog_alpha);
+}
+
 draw_sprite_ext(spr_dialog_arrow, 0, vw  + (dialog_width / 2) - 70 , vh + dialog_height + 50, 0.5, 0.5, 0, -1, dialog_alpha);
 
 // Draw name
 draw_set_font(name_font);
-draw_text_ext_color(vw  - (dialog_width / 2) + 110, vh + 105, "Daniel Lim", text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
+if (data[text_current][1] == "right") {
+	draw_text_ext_color(vw  - (dialog_width / 2) + 110, vh + 105, data[text_current][0], text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
+} else {
+	draw_text_ext_color(vw + 180, vh + 105, data[text_current][0], text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
+}
 
 // Draw text
 draw_set_font(dialog_font);

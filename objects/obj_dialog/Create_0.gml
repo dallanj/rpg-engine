@@ -10,6 +10,8 @@ dialog_font = font_add("Gaegu-Regular.ttf", 28, false, false, 32, 128);
 name_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 24, false, false, 32, 128);
 name_color = make_color_rgb(29.8, 29.8, 74.5);
 has_right_character = true;
+current_speaker = "Daniel Lim";
+dialog_position = "right";
 
 // Centering based on view ports
 vw = view_xport[0] + view_wport[0] / 2;
