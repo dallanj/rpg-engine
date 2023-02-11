@@ -23,7 +23,7 @@ slot_hover = 0; // Mouse hover over slot
 //vw = (camera_get_view_width(view_camera[0]) / 2) - inventory_width / 2;
 //vh = camera_get_view_height(view_camera[0]) - inventory_height;
 vw = (view_xport[0] + view_wport[0] / 2) - (inventory_width / 2);
-vh = view_yport[0] + view_hport[0] / 2 - 250;
+vh = view_yport[0] + view_hport[0] / 2 + 250;
 
 // Item sprite dimensions
 item_width = 56; // 56

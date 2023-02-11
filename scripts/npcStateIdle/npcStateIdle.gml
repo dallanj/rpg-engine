@@ -22,9 +22,6 @@ function npcStateIdle(event, stateLayer) {
 					if (!instance_exists(obj_dialog)) {
 						dialog = instance_create_layer(x, y, "dialog", obj_dialog);
 						dialog.text_last = array_length(self.character.dialog_script) - 1;
-						dialog.current_speaker = self.character.dialog_script[0][0];
-						dialog.dialog_position = self.character.dialog_script[0][1];
-						
 						for (i = 0; i <= dialog.text_last; i++) {
 							dialog.data[i] = self.character.dialog_script[i];
 							dialog.test[i] = self.character.dialog_script[i][2];

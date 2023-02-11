@@ -68,7 +68,7 @@ function characterStateWalk(event, stateLayer) {
 
 		break;
 		case StateMemoryEvent.DrawGui:
-			characterDrawGui(self.player, stateLayer);
+			//characterDrawGui(self.player, stateLayer);
 		break;
 	};
 }

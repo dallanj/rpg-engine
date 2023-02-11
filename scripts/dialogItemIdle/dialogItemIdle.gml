@@ -20,7 +20,11 @@ function dialogItemIdle(event, stateLayer) {
 					if (!instance_exists(obj_dialog)) {
 						dialog = instance_create_layer(x, y, "dialog", obj_dialog);
 						dialog.has_right_character = false;
-						dialog.test[0] = self.item.dialog_script[0];
+						dialog.text_last = array_length(self.item.dialog_script) - 1;
+						for (i = 0; i <= dialog.text_last; i++) {
+							dialog.data[i] = self.item.dialog_script[i];
+							dialog.test[i] = self.item.dialog_script[i][2];
+						}
 					}
 				}
 				

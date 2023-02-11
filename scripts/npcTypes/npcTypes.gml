@@ -4,10 +4,8 @@ function Sarah () : Npc () constructor {
 	sprite = spr_npc_sarah;
 	object = obj_npc_sarah;
 	sprites = frames.D;
-	dialog_script[0] = [name,"left","Hello I'm Sarah the NPC girl"];
-	dialog_script[1] = ["Daniel Lim","right","GET OUT OF MY ROOM SARAH!"];
-	dialog_script[2] = ["Daniel Lim","right","LIKE RIGHT NOW!!!"];
-	dialog_script[3] = [name,"left","OK SORRY... I WILL"];
+	dialog_script[0] = [name,"left","Hello I'm Sarah the NPC girl."];
+	dialog_script[1] = ["Daniel Lim","right","FUCK OFF SARAH!"];
 }
 
 function Bob () : Npc () constructor {
