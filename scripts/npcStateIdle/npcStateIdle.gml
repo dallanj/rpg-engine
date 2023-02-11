@@ -19,13 +19,17 @@ function npcStateIdle(event, stateLayer) {
 			// Dialog box
 			if (distance_to_object(obj_player) < 5) {
 				if (keyboard_check_pressed(vk_space)) {
-					if (!instance_exists(obj_dialog)) {	
-						instance_create_layer(x, y, "dialog", obj_dialog);
+					if (!instance_exists(obj_dialog)) {
+						//show_message(string(self.character.dialog_script));
+						dialog = instance_create_layer(x, y, "dialog", obj_dialog);
+						dialog.text = self.character.dialog_script;
 					}
 				}
-			} else {
-				if (instance_exists(obj_dialog)) {
-					instance_destroy(obj_dialog);
+				
+				if (characterCheckKeys(["W","A","S","D"])) {
+					if (instance_exists(obj_dialog)) {
+						instance_destroy(obj_dialog);
+					}
 				}
 			}
 		break;
