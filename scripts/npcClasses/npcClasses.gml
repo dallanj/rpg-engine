@@ -7,6 +7,7 @@ function Npc () constructor {
 	sprite = "";
 	object = "";
 	description = "";
+	dialog_script[0] = "";
 	frames = {
 		W: [0, 1, 2],
 		D: [3, 4, 5],

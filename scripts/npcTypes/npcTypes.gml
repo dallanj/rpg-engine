@@ -4,7 +4,7 @@ function Sarah () : Npc () constructor {
 	sprite = spr_npc_sarah;
 	object = obj_npc_sarah;
 	sprites = frames.D;
-	dialog_script = "Hello I'm Sarah the NPC girl";
+	dialog_script[0] = "Hello I'm Sarah the NPC girl";
 }
 
 function Bob () : Npc () constructor {
@@ -13,5 +13,5 @@ function Bob () : Npc () constructor {
 	sprite = spr_npc_bob;
 	object = obj_npc_bob;
 	sprites = frames.S;
-	dialog_script = "Hello I'm Bobby the NPC guy";
+	dialog_script[0] = "Hello I'm Bobby the NPC guy";
 }

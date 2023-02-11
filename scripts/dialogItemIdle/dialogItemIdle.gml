@@ -5,12 +5,10 @@
 *
 * @return void
 */
-function npcStateIdle(event, stateLayer) {
+function dialogItemIdle(event, stateLayer) {
 	switch (event) {
 		case StateMemoryEvent.Enter:
 			if (stateLayer.isNewState) {
-				image_speed = 0;
-				image_index = self.character.sprites[0];
 				show_debug_message("begin idle state for npc");
 			}
 		break;
@@ -21,7 +19,8 @@ function npcStateIdle(event, stateLayer) {
 				if (keyboard_check_pressed(vk_space)) {
 					if (!instance_exists(obj_dialog)) {
 						dialog = instance_create_layer(x, y, "dialog", obj_dialog);
-						dialog.test[0] = self.character.dialog_script[0];
+						dialog.has_right_character = false;
+						dialog.test[0] = self.item.dialog_script[0];
 					}
 				}
 				
