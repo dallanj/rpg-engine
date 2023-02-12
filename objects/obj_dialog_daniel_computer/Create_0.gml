@@ -1,5 +1,5 @@
 /// @description
-item = new DanielComputer();
+obj_data = new DanielComputer();
 
 // State
 this = generateStateMemory();

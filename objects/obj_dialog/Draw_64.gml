@@ -1,3 +1,4 @@
+
 // Draw characters speaking on the left side
 if (has_right_character) {
 	draw_sprite_ext(spr_dialog_luna, 0, vw - 700, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
@@ -38,6 +39,8 @@ if (dialog_alpha >= max_alph) {
 	draw_text_ext(text_x, text_y, _str, text_height + 10, dialog_width - 80);
 }
 
+draw_text(6,30,"text_current = " + string(text_current));
+draw_text(6,60,"text_last = " + string(text_last));
 //draw_text_ext(vw  - (dialog_width / 2) + 80, vh + 170, text, text_height + 14, dialog_width - 80);
 
 //font_delete(new_font);

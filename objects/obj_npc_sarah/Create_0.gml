@@ -1,5 +1,5 @@
 /// @description
-character = new Sarah();
+obj_data = new Sarah();
 
 // State
 this = generateStateMemory();

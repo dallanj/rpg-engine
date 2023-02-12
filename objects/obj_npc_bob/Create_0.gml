@@ -1,5 +1,5 @@
 /// @description
-character = new Bob();
+obj_data = new Bob();
 
 // State
 this = generateStateMemory();

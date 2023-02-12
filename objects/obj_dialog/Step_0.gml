@@ -10,15 +10,30 @@ if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), vw  + 
 		// Skip dialog
 		var length = string_length(test[text_current]);
 		if (char_current < length) {
-		    char_current = length;
+			char_current = length;
 		} else {
-		    text_current += 1;
-		    if (text_current > text_last){
-		        room_restart();
+			text_current += 1;
+			if (text_current > text_last){
+			    //global.show_inventory = true; // Destroy dialog box when finished scripts
+				instance_destroy(self);
 			} else {
-		        test[text_current] = string_wrap(test[text_current], text_width);
-		        char_current = 0;
+			    test[text_current] = string_wrap(test[text_current], text_width);
+			    char_current = 0;
 			}
 		}
+	}
+}
+
+// Unlock dialog
+if (text_current <= text_last) {
+	if (data[text_current][3] != noone) {
+	//[obj_dialog_daniel_journal, "item", 1]
+	//show_message("GASD: " + string(data[text_current][3]));
+		unlockDialog(data[text_current][3]);
+	}
+	
+	if (data[text_current][4] != noone) {
+		//[obj_dialog_daniel_journal, "item", 1]
+		data[text_current][4]();
 	}
 }

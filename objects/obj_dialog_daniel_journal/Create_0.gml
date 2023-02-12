@@ -1,5 +1,5 @@
 /// @description
-item = new DanielJournal();
+obj_data = new DanielJournal();
 
 // State
 this = generateStateMemory();

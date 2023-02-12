@@ -10,7 +10,7 @@ function npcStateIdle(event, stateLayer) {
 		case StateMemoryEvent.Enter:
 			if (stateLayer.isNewState) {
 				image_speed = 0;
-				image_index = self.character.sprites[0];
+				image_index = self.obj_data.sprites[0];
 				show_debug_message("begin idle state for npc");
 			}
 		break;
@@ -21,10 +21,11 @@ function npcStateIdle(event, stateLayer) {
 				if (keyboard_check_pressed(vk_space)) {
 					if (!instance_exists(obj_dialog)) {
 						dialog = instance_create_layer(x, y, "dialog", obj_dialog);
-						dialog.text_last = array_length(self.character.dialog_script) - 1;
+						dialog.text_current = 0;
+						dialog.text_last = array_length(self.obj_data.dialog_script[self.obj_data.dialog_current]) - 1;
 						for (i = 0; i <= dialog.text_last; i++) {
-							dialog.data[i] = self.character.dialog_script[i];
-							dialog.test[i] = self.character.dialog_script[i][2];
+							dialog.data[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i];
+							dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i][2];
 						}
 					}
 				}
@@ -37,7 +38,7 @@ function npcStateIdle(event, stateLayer) {
 			}
 		break;
 		case StateMemoryEvent.DrawGui:
-			//draw_text(200,100,"dialog box = " + string(dialog_toggle));
+			
 		break;
 	};
 }
