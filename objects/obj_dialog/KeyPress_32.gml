@@ -24,4 +24,6 @@ if (dialog_alpha >= max_alph) {
 			}
 		}
 	}
+	
+	keyboard_clear(vk_space);
 }

@@ -32,7 +32,7 @@ text[text_current] = string_wrap(test[text_current], text_width);
 // Fade in transition
 dialog_alpha = 0;
 max_alph = 1;
-alph_timer = .01;
+alph_timer = .03;
 
 //word_count = string_count(" ",test);
 //words = ExplodeString(test);
