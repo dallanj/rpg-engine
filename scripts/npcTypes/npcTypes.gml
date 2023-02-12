@@ -6,16 +6,16 @@ function Sarah () : Npc () constructor {
 	sprites = frames.D;
 	dialog_current = 0; // Active script unlocked
 	// Script 1 - Unlock journal dialog 1
-	dialog_script[0][0] = [name,"left","Hello I'm Sarah the NPC girl.",noone,noone];
-	dialog_script[0][1] = [name,"left","Have you read your journal?",noone,noone];
-	dialog_script[0][2] = ["Daniel Lim","right","I have not",noone,noone];
-	dialog_script[0][3] = [name,"left","Come back when you have read it.",[[obj_dialog_daniel_journal, 1]],noone];
+	dialog_script[0][0] = [name,"left","Hello I'm Sarah the NPC girl.",noone,noone,noone];
+	dialog_script[0][1] = [name,"left","Have you read your journal?",noone,noone,noone];
+	dialog_script[0][2] = ["Daniel Lim","right","I have not",noone,noone,noone];
+	dialog_script[0][3] = [name,"left","Come back when you have read it.",[[obj_dialog_daniel_journal, 1]],noone,noone];
 	// Script 2
-	dialog_script[1][0] = ["Daniel Lim","right","I read my journal",noone,noone];
-	dialog_script[1][1] = [name,"left","Great!!!",[[obj_dialog_daniel_journal, 2],[obj_npc_sarah, 2]],completeQuest];
+	dialog_script[1][0] = ["Daniel Lim","right","I read my journal",noone,noone,noone];
+	dialog_script[1][1] = [name,"left","Great!!!",[[obj_dialog_daniel_journal, 2],[obj_npc_sarah, 2]],completeQuest,noone];
 	// Script 3 - Unlocked after completing sarahs quest
-	dialog_script[2][0] = [name,"left","Hi Daniel",noone,noone];
-	dialog_script[2][1] = ["Daniel Lim","right","Hi Sarah",noone,noone];
+	dialog_script[2][0] = [name,"left","Hi Daniel",noone,noone,noone];
+	dialog_script[2][1] = ["Daniel Lim","right","Hi Sarah",noone,noone,noone];
 }
 
 function Bob () : Npc () constructor {
@@ -24,9 +24,27 @@ function Bob () : Npc () constructor {
 	sprite = spr_npc_bob;
 	object = obj_npc_bob;
 	sprites = frames.S;
-	dialog_script[0] = [name,"left","Hello I'm Bobby the NPC guy"];
-	dialog_script[1] = ["Daniel Lim","right","I'm Daniel, what are you doing in my room?!"];
-	dialog_script[2] = [name,"left","Well... you see I'm not sure. How do I leave your room?"];
-	dialog_script[3] = ["Daniel Lim","right","I'm not sure either... well maybe through the door there"];
-	dialog_script[4] = [name,"left","Okay thanks I guess. Bye"];
+	dialog_current = 0; // Active script unlocked
+	
+	// Script to start quest of turning on computer
+	dialog_script[0][0] = [name,"left","Can you turn on your computer for me?",noone,noone,noone];
+	dialog_script[0][1] = ["Daniel Lim","right",noone,noone,noone,[[1,"Yes","Yes I will",[[obj_dialog_daniel_computer, 1],[obj_npc_bob, 2]]],[2,"Not right now","I will later",noone],[3,"Fuck off","NOPE!",[[obj_npc_bob, 1]]]]];
+	dialog_script[0][2] = [name,"left","Ok",noone,noone,noone];
+	
+	// After option 3 is selected - Option to start quest is gone
+	dialog_script[1][0] = [name,"left","Go away",noone,noone,noone];
+	
+	// After option 1 is selected - Option to start quest is gone
+	dialog_script[2][0] = [name,"left","Did you turn on computer yet?",noone,noone,noone];
+	dialog_script[2][1] = ["Daniel Lim","right","No not yet",noone,noone,noone];
+	
+	// After computer turned on - Quest complete
+	dialog_script[3][0] = [name,"left","Thanks for using your computer!",noone,noone,noone];
+	dialog_script[3][1] = ["Daniel Lim","right","No problem!",[[obj_npc_bob, 4]],noone,noone];
+	
+	// Regular dialog after quest complete
+	dialog_script[4][0] = [name,"left","Hey Daniel",noone,noone,noone];
+	dialog_script[4][1] = ["Daniel Lim","right","Hey Bob",noone,noone,noone];
+	
+	
 }

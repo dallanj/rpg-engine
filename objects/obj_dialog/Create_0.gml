@@ -12,6 +12,7 @@ name_color = make_color_rgb(29.8, 29.8, 74.5);
 has_right_character = true;
 current_speaker = "Daniel Lim";
 dialog_position = "right";
+display_choices = false;
 
 // Centering based on view ports
 vw = view_xport[0] + view_wport[0] / 2;

@@ -30,35 +30,29 @@ if (data[text_current][1] == "right") {
 draw_set_font(dialog_font);
 draw_set_color(c_white);
 if (dialog_alpha >= max_alph) {
-	var _len = string_length(test[text_current]);
-	if (char_current < _len) {
-		char_current += char_speed;
-	}
 	
-	var _str = string_copy(test[text_current], 1, char_current);
-	draw_text_ext(text_x, text_y, _str, text_height + 10, dialog_width - 80);
+	if (display_choices) {
+		//show_message(data[text_current][5][0]);
+		for (i = 0; i < array_length(data[text_current][5]); i++) {
+			//show_message(data[text_current][5][i][1]);
+			draw_text(text_x, text_y + (i * 32),string(data[text_current][5][i][0]) + ". " + string(data[text_current][5][i][1]));
+		}
+	} else {
+		var _len = string_length(test[text_current]);
+		if (char_current < _len) {
+			char_current += char_speed;
+		}
+	
+		var _str = string_copy(test[text_current], 1, char_current);
+		draw_text_ext(text_x, text_y, _str, text_height + 10, dialog_width - 80);
+	}
 }
 
 draw_text(6,30,"text_current = " + string(text_current));
 draw_text(6,60,"text_last = " + string(text_last));
-//draw_text_ext(vw  - (dialog_width / 2) + 80, vh + 170, text, text_height + 14, dialog_width - 80);
 
-//font_delete(new_font);
-//draw_set_color(c_red);
-//draw_text(0, 80, "OPACITY: " + string(opacity));
-
-//for (i = 0; i <= word_count; i += 1) {
-//	//show_message(words_array[i]);
-//	for (j = 0; j < string_length(words[i]); j += 1) {
-//		//show_message(words_array[i][j]);
-//		//while (opacity >= 100) {
-//			//show_message("ONE");
-//			//draw_text(100, 80, "OPACITY: " + string(opacity));
-
-//			draw_text_ext_colour(vw  - (dialog_width / 2) + 80, vh + 170, words_array[i][j], text_height + 14, dialog_width - 80, c_white, c_white, c_white, c_white, opacity);
-//		//}
-		
-//		//opacity = 0;
+//if (display_choices && (dialog_alpha >= max_alph)) {
+//	for (i = 0; i <= array_length(data[text_current][5]); i++) {
+//		draw_rectangle(text_x, text_y + (i * 32), text_x + (dialog_width) - 175, text_y + ((i + 1) * 32), true);
 //	}
 //}
-//draw_rectangle(vw  + (dialog_width / 2) - 75, vh + 285,  vw  + (dialog_width / 2) - 40, (vh + 285) + 30, true)

@@ -8,8 +8,20 @@ if (dialog_alpha >= max_alph) {
 		if (text_current > text_last){
 		    instance_destroy(self);
 		} else {
-		    test[text_current] = string_wrap(test[text_current], text_width);
-		    char_current = 0;
+			// If choice based dialog
+			if (test[text_current] == noone) {
+				//show_message(data[text_current]);
+				
+				if (data[text_current][5] == noone) {
+					instance_destroy(self);	
+				} else {
+					display_choices = true;
+				}
+				
+			} else {
+				test[text_current] = string_wrap(test[text_current], text_width);
+				char_current = 0;
+			}
 		}
 	}
 }
