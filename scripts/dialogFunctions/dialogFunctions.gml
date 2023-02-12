@@ -7,12 +7,14 @@
 */
 function unlockDialog(data) {
 	if (data != noone) {
-		for (i = 0; i < array_length(data); i++) {	
-			with(data[i][0]) {
-				obj_data.dialog_current = data[other.i][1];
+		for (k = 0; k < array_length(data); k++) {	
+			with(data[k][0]) {
+				obj_data.dialog_current = data[other.k][1];
 			}
 		}
 	}
+	
+	return;
 };
 
 function completeQuest() {
