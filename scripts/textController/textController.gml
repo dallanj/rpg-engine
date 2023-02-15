@@ -6,11 +6,12 @@
 * @param outline_color (int)
 * @param string_color (int)
 * @param string (string)
+* @param font (int)
 *
 * @return void
 */
-function DrawTextOutlined(xx, yy, outline_color, string_color, string) {
-	draw_set_font(font_inventory);
+function DrawTextOutlined(xx, yy, outline_color, string_color, string, font) {
+	draw_set_font(font);
 	
 	// Outline
 	draw_set_color(outline_color);

@@ -1,5 +1,5 @@
 // Skip dialog
-if (dialog_alpha >= max_alph) {
+if (dialog_alpha >= max_alph && !display_choices) {
 	var length = string_length(test[text_current]);
 	if (char_current < length) {
 		char_current = length;

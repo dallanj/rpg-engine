@@ -4,8 +4,8 @@ if (!global.dialog_exists) {
 	draw_sprite_ext(spr_inventory, 0, vw, vh, 1, 1, 0, -1, 0.5);
 
 	// Text colors
-	draw_set_color(c_grey);
-	draw_set_font(font_inventory);
+	draw_set_color(c_purple);
+	draw_set_font(quantity_font);
 
 	// Draw inventory selector
 	x_pos = selector_start_width + vw;
@@ -48,7 +48,8 @@ if (!global.dialog_exists) {
 			text_y_pos = y_pos + (item_height / 2) + 4; // 10
 		
 			// Item quantity
-			DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, item.quantity);
+			//draw_text(text_x_pos, text_y_pos, string(item.quantity));
+			DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, item.quantity, quantity_font);
 		}
 	}
 
@@ -70,13 +71,13 @@ if (!global.dialog_exists) {
 			draw_sprite(spr_inv_tooltip, 0, tooltip_x_pos, tooltip_y_pos);
 		
 			// Name of item and quantity
-			draw_set_font(font_tool_tip);
+			draw_set_font(desc_font);
 			var tooltip_title = item.stackable ? string(item.name) + " x" + string(item.quantity) : string(item.name);
-			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos, c_black, c_white, tooltip_title);
+			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos, c_black, c_white, tooltip_title, quantity_font);
 		
 			// Description of item
-			draw_set_font(font_inventory);
-			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos + 75, c_black, c_white, string(item.slot));
+			draw_set_font(quantity_font);
+			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos + 75, c_black, c_white, string(item.slot), quantity_font);
 		
 		}
 	}

@@ -12,7 +12,7 @@ function Sarah () : Npc () constructor {
 	dialog_script[0][3] = [name,"left","Come back when you have read it.",[[obj_dialog_daniel_journal, 1]],noone,noone];
 	// Script 2
 	dialog_script[1][0] = ["Daniel Lim","right","I read my journal",noone,noone,noone];
-	dialog_script[1][1] = [name,"left","Great!!!",[[obj_dialog_daniel_journal, 2],[obj_npc_sarah, 2]],completeQuest,noone];
+	dialog_script[1][1] = [name,"left","Great!!!",[[obj_dialog_daniel_journal, 2],[obj_npc_sarah, 2]],[[updateCurrency, 25]],noone];
 	// Script 3 - Unlocked after completing sarahs quest
 	dialog_script[2][0] = [name,"left","Hi Daniel",noone,noone,noone];
 	dialog_script[2][1] = ["Daniel Lim","right","Hi Sarah",noone,noone,noone];
@@ -39,7 +39,7 @@ function Bob () : Npc () constructor {
 	dialog_script[2][1] = ["Daniel Lim","right","No not yet",noone,noone,noone];
 	
 	// After computer turned on - Quest complete
-	dialog_script[3][0] = [name,"left","Thanks for using your computer!",noone,noone,noone];
+	dialog_script[3][0] = [name,"left","Thanks for using your computer!",noone,[[updateCurrency, 100],[updateInventory,[obj_item_shell,6]],[updateInventory,[obj_item_toad,1]]],noone];
 	dialog_script[3][1] = ["Daniel Lim","right","No problem!",[[obj_npc_bob, 4]],noone,noone];
 	
 	// Regular dialog after quest complete

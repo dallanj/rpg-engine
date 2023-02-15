@@ -12,6 +12,10 @@ global.total_slots = 9;
 inventory_width = sprite_get_width(spr_inventory);
 inventory_height = sprite_get_height(spr_inventory);
 
+// Inventory Fonts
+quantity_font = font_add("Gaegu-Regular.ttf", 14, false, false, 32, 128);
+desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 18, false, false, 32, 128);
+
 // Starting items for player
 ds_list_add(global.inventory, global.items[ITEM.GHOST]);
 

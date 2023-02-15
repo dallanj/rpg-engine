@@ -17,6 +17,11 @@ function unlockDialog(data) {
 	return;
 };
 
-function completeQuest() {
-	show_debug_message("completeQuest");	
+function updateCurrency(amount) {
+	global.currency += amount;
+};
+
+function updateInventory(item, add, quantity) {
+	//show_message(string(item) + " item  " + string(add) + " " + string(quantity));
+	AddItem(item, quantity, true);
 };

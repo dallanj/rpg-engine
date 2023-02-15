@@ -1,28 +1,31 @@
 /// @description Draw HUD
 draw_set_font(font_hud);
 
-// Draw HUD
-draw_sprite(spr_hud, 0, vw, vh);
+if (!global.dialog_exists) {
+	// Draw HUD
 
-// For every 60 minutes; update hour
-if (global.minutes == 60) updateHour();
+	// For every 60 minutes; update hour
+	if (global.minutes == 60) updateHour();
 
-// For every 24 hours; update day
-if (global.hours == 24) updateDay();
+	// For every 24 hours; update day
+	if (global.hours == 24) updateDay();
 
-// Date formats
-var day = getDayString();
-var hours = formatTime(global.hours);
-var minutes = formatTime(global.minutes);
+	// Date formats
+	var day = getDayString();
+	var hours = formatTime(global.hours);
+	var minutes = formatTime(global.minutes);
 
-// Draw day of the week and current time
-var date = day + ", " + hours + ":" + minutes + " - (day " + string(global.total_days) + ")";
-DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, date);
+	// Draw day of the week and current time
+	var time = day + ", " + hours + ":" + minutes;
+	var date = " (day " + string(global.total_days) + ")";
+	DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, time, desc_font);
+	DrawTextOutlined(text_x_pos + 175, text_y_pos, c_black, c_white, date, desc_font);
 
-// Draw reputation bar
-var reputation = "Reputation: " + string(global.reputation);
-DrawTextOutlined(text_x_pos, text_y_pos + 50, c_black, c_white, reputation);
+	// Draw reputation bar
+	var reputation = "Reputation: " + string(global.reputation);
+	DrawTextOutlined(text_x_pos, text_y_pos + 30, c_black, c_white, reputation, desc_font);
 
-// Draw currency
-var currency = "Currency: " + string(global.currency);
-DrawTextOutlined(text_x_pos, text_y_pos + 100, c_black, c_white, currency);
+	// Draw currency
+	var currency = "Currency: " + string(global.currency);
+	DrawTextOutlined(text_x_pos, text_y_pos + 60, c_black, c_white, currency, desc_font);
+}

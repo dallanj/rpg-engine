@@ -12,13 +12,17 @@ hud_width = sprite_get_width(spr_hud);
 hud_height = sprite_get_height(spr_hud);
 
 // Viewport positions
-vw = camera_get_view_width(view_camera[0]) - hud_width;
+//vw = camera_get_view_width(view_camera[0]) - hud_width;
+vw = 20
 vh = 0;
 
 // Variables
 text_x_pos = vw + 25;
-text_y_pos = vh + 25;
+text_y_pos = vh + 25; 
 real_time = 0.5; // Real time in seconds
+
+quantity_font = font_add("Gaegu-Regular.ttf", 14, false, false, 32, 128);
+desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 18, false, false, 32, 128);
 
 // Update time
 alarm[0] = real_time * room_speed; // Every second

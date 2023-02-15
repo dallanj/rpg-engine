@@ -48,8 +48,8 @@ if (dialog_alpha >= max_alph) {
 	}
 }
 
-draw_text(6,30,"text_current = " + string(text_current));
-draw_text(6,60,"text_last = " + string(text_last));
+//draw_text(6,30,"text_current = " + string(text_current));
+//draw_text(6,60,"text_last = " + string(text_last));
 
 //if (display_choices && (dialog_alpha >= max_alph)) {
 //	for (i = 0; i <= array_length(data[text_current][5]); i++) {

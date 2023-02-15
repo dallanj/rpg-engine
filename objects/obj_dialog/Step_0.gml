@@ -54,16 +54,4 @@ if (display_choices && (dialog_alpha >= max_alph)) {
 	}
 }
 
-// Unlock dialog
-if (text_current <= text_last) {
-	if (data[text_current][3] != noone) {
-	//[obj_dialog_daniel_journal, "item", 1]
-	//show_message("GASD: " + string(data[text_current][3]));
-		unlockDialog(data[text_current][3]);
-	}
-	
-	if (data[text_current][4] != noone) {
-		//[obj_dialog_daniel_journal, "item", 1]
-		data[text_current][4]();
-	}
-}
+

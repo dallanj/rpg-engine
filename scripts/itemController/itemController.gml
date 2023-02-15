@@ -45,9 +45,11 @@ function DropItem(xx, yy, instance, item) {
 }
 
 // Add item to inventory
-function AddItem(object) {
+function AddItem(object, quantity, from_quest = false) {
 	var inventory_size = ds_list_size(global.inventory);
 	var item, open_slot;
+	
+	if (!instance_exists(object)) object = instance_create_layer(0,0,"Instances",object);
 
 	// Update global inventory array with item slots
 	UpdateInventoryArray();
@@ -59,11 +61,14 @@ function AddItem(object) {
 	if (inventory_size < global.total_slots && !object.item.stackable) {
 		object.item.slot = open_slot;
 		ds_list_add(global.inventory, object.item);
-		instance_destroy(object);
+		if (!from_quest) {
+			instance_destroy(object);
+		}
 	}
 
 	// Items that are stackable
 	if (object.item.stackable) {
+		
 		var in_inventory = false;
 		// Iterate through inventory
 		for (var i = 0; i < inventory_size; i ++) {
@@ -72,20 +77,33 @@ function AddItem(object) {
 			
 			// If inventory object name is the same as the item we are picking up
 			if (item.name == object.item.name) {
-				item.quantity += object.quantity;
-				in_inventory = true;
+				if (quantity > 1) {
+					item.quantity += quantity;
+					in_inventory = true;
+				} else {
+					item.quantity += object.quantity;
+					in_inventory = true;
+				}
 			}
 		}
 	
 		// If item is in inventory
 		if (in_inventory) {
-			instance_destroy(object);
+			if (!from_quest) {
+				instance_destroy(object);
+			}
 		} else if (!in_inventory && inventory_size < global.total_slots) {
 			// If item is not in the inventory and slots are open
-			object.item.quantity = object.quantity;
+			if (quantity > 1) {
+				object.item.quantity = quantity;
+			} else {				
+				object.item.quantity = object.quantity;
+			}
 			object.item.slot = open_slot;
 			ds_list_add(global.inventory, object.item);
-			instance_destroy(object);
+			if (!from_quest) {
+				instance_destroy(object);
+			}
 		}
 	}
 }
