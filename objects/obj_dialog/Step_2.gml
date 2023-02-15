@@ -11,12 +11,13 @@ if (text_current <= text_last) {
 	if (data[text_current][4] != noone && !quest_complete) {
 		for (i = 0; i < array_length(data[text_current][4]); i++) {
 			if (is_array(data[text_current][4][i][1])) {
-				//AddItem(data[text_current][4][i][1][0], data[text_current][4][i][1][1], true);
-				//ds_list_add(global.inventory, global.items[ITEM.SHELL]);
+				// Update global inventory array with item slots
+				UpdateInventoryArray();
+				var item = global.items[data[text_current][4][i][1][0]];
 				// Return an open slot in the inventory
-				//var open_slot = GetOpenInventorySlot();
-				show_message(ds_list_size(global.inventory));
-				ds_list_replace(global.inventory, 2, global.items[ITEM.SHELL]);
+				item.slot = GetOpenInventorySlot();
+				item.quantity = data[text_current][4][i][1][1];
+				ds_list_add(global.inventory, item);
 				
 			} else {
 				data[text_current][4][i][0](data[text_current][4][i][1]);

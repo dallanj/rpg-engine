@@ -39,7 +39,7 @@ function Bob () : Npc () constructor {
 	dialog_script[2][1] = ["Daniel Lim","right","No not yet",noone,noone,noone];
 	
 	// After computer turned on - Quest complete
-	dialog_script[3][0] = [name,"left","Thanks for using your computer!",noone,[[updateCurrency, 100],[updateInventory,[obj_item_shell,6]],[updateInventory,[obj_item_toad,1]]],noone];
+	dialog_script[3][0] = [name,"left","Thanks for using your computer!",noone,[[updateCurrency, 100],[updateInventory,[ITEM.TOAD,1]],[updateInventory,[ITEM.SHELL,6]]],noone];
 	dialog_script[3][1] = ["Daniel Lim","right","No problem!",[[obj_npc_bob, 4]],noone,noone];
 	
 	// Regular dialog after quest complete
