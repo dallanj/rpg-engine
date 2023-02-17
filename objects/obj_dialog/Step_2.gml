@@ -3,9 +3,20 @@
 // Unlock dialog
 if (text_current <= text_last) {
 	if (data[text_current][3] != noone) {
-	//[obj_dialog_daniel_journal, "item", 1]
-	//show_message("GASD: " + string(data[text_current][3]));
-		unlockDialog(data[text_current][3]);
+		for (j = 0; j < array_length(data[text_current][3]); j++) {
+						
+			switch (data[text_current][3][j][0]) {
+				case "startQuest":
+					startQuest(data[text_current][3][j]);
+				break
+				case "completeQuest":
+					completeQuest(data[text_current][3][j]);
+				break;
+				case "unlockDialog":
+					unlockDialog(data[text_current][3][j]);
+				break;
+			}
+		}
 	}
 	
 	if (data[text_current][4] != noone && !quest_complete) {

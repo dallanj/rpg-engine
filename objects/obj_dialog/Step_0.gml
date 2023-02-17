@@ -45,7 +45,20 @@ if (display_choices && (dialog_alpha >= max_alph)) {
 				test[text_current] = string_wrap(test[text_current], text_width);
 				char_current = 0;
 				if (data[text_current][5][i][3] != noone) {
-					unlockDialog(data[text_current][5][i][3]);
+					for (j = 0; j < array_length(data[text_current][5][i][3]); j++) {
+						
+						switch (data[text_current][5][i][3][j][0]) {
+							case "startQuest":
+								startQuest(data[text_current][5][i][3][j]);
+							break;
+							case "completeQuest":
+								completeQuest(data[text_current][5][i][3][j]);
+							break;
+							case "unlockDialog":
+								unlockDialog(data[text_current][5][i][3][j]);
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -58,7 +71,19 @@ if (display_choices && (dialog_alpha >= max_alph)) {
 				test[text_current] = string_wrap(test[text_current], text_width);
 				char_current = 0;
 				if (data[text_current][5][i][3] != noone) {
-					unlockDialog(data[text_current][5][i][3]);
+					for (j = 0; j < array_length(data[text_current][5][i][3]); j++) {			
+						switch (data[text_current][5][i][3][j][0]) {
+							case "startQuest":
+								startQuest(data[text_current][5][i][3][j]);
+							break;
+							case "completeQuest":
+								completeQuest(data[text_current][5][i][3][j]);
+							break;
+							case "unlockDialog":
+								unlockDialog(data[text_current][5][i][3][j]);
+							break;
+						}
+					}
 				}
 			}
 		}

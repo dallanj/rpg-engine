@@ -1,7 +1,6 @@
-
 // Draw characters speaking on the left side
 if (has_right_character) {
-	draw_sprite_ext(spr_dialog_luna, 0, vw - 700, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
+	draw_sprite_ext(data[text_current][6], 0, vw - 700, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
 }
 
 // Draw characters speaking on the left side
