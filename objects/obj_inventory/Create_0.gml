@@ -18,6 +18,13 @@ desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 18, false, false, 32,
 
 // Starting items for player
 ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+ds_list_add(global.inventory, global.items[ITEM.TOAD]);
 
 // Slot positions
 slot_pos = 0; // Keybinds and mouse scroll

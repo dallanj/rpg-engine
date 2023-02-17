@@ -16,7 +16,9 @@ if (data[text_current][1] == "right") {
 	draw_sprite_ext(spr_dialog_name_tag, 0, vw + 150, vh + 95, 0.75, 0.75, 0, -1, dialog_alpha);
 }
 
-draw_sprite_ext(spr_dialog_arrow, 0, vw  + (dialog_width / 2) - 70 , vh + dialog_height + 50, 0.5, 0.5, 0, -1, dialog_alpha);
+if (display_choices == false) {
+	draw_sprite_ext(spr_dialog_arrow, 0, vw  + (dialog_width / 2) - 70 , vh + dialog_height + 50, 0.5, 0.5, 0, -1, dialog_alpha);
+}
 
 // Draw name
 draw_set_font(name_font);

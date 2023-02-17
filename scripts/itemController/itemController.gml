@@ -73,13 +73,8 @@ function AddItem(object) {
 			
 			// If inventory object name is the same as the item we are picking up
 			if (item.name == object.item.name) {
-				if (quantity > 1) {
-					item.quantity += quantity;
-					in_inventory = true;
-				} else {
-					item.quantity += object.quantity;
-					in_inventory = true;
-				}
+				item.quantity += object.quantity;
+				in_inventory = true;
 			}
 		}
 	
@@ -87,12 +82,8 @@ function AddItem(object) {
 		if (in_inventory) {
 			instance_destroy(object);
 		} else if (!in_inventory && inventory_size < global.total_slots) {
-			// If item is not in the inventory and slots are open
-			if (quantity > 1) {
-				object.item.quantity = quantity;
-			} else {				
-				object.item.quantity = object.quantity;
-			}
+			// If item is not in the inventory and slots are open				
+			object.item.quantity = object.quantity;
 			object.item.slot = open_slot;
 			ds_list_add(global.inventory, object.item);
 			instance_destroy(object);

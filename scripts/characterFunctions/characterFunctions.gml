@@ -104,14 +104,14 @@ function characterMovement(pos, spd, object, vertical = false) {
 	if (vertical) {
 		if (
 			!place_meeting(x, y + (pos * (spd * sign(spd))), object)
-			&& !place_meeting(x, y + (pos * (spd * sign(spd))), obj_npc_controller)
+			//&& !place_meeting(x, y + (pos * (spd * sign(spd))), obj_npc_controller)
 		) {
 			y += spd;
 		} else {
 			// Move 1 pixel until player is next to wall
 			while (
 				!place_meeting(x, y + pos, object)
-				&& !place_meeting(x, y + pos, obj_npc_controller)
+				//&& !place_meeting(x, y + pos, obj_npc_controller)
 			) {
 				y += pos;
 			}
@@ -120,14 +120,14 @@ function characterMovement(pos, spd, object, vertical = false) {
 	} else {
 		if (
 			!place_meeting(x + (pos * (spd * sign(spd))), y, object)
-			&& !place_meeting(x + (pos * (spd * sign(spd))), y, obj_npc_controller)
+			//&& !place_meeting(x + (pos * (spd * sign(spd))), y, obj_npc_controller)
 		) {
 			x += spd;
 		} else {
 			// Move 1 pixel until player is next to wall
 			while (
 				!place_meeting(x + pos, y, object)
-				&& !place_meeting(x + pos, y, obj_npc_controller)
+				//&& !place_meeting(x + pos, y, obj_npc_controller)
 			) {
 				x += pos;
 			}
