@@ -17,14 +17,28 @@ quantity_font = font_add("Gaegu-Regular.ttf", 14, false, false, 32, 128);
 desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 18, false, false, 32, 128);
 
 // Starting items for player
-ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-ds_list_add(global.inventory, global.items[ITEM.TOAD]);
-ds_list_add(global.inventory, global.items[ITEM.TOAD]);
-ds_list_add(global.inventory, global.items[ITEM.TOAD]);
-ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+UpdateInventoryArray();
+for (var i = 0; i < global.total_slots; i ++) {
+	
+	item = global.items[ITEM.GHOST];				
+	// Return an open slot in the inventory
+	var open_slot = GetOpenInventorySlot();
+	item.slot = i + 1;
+	item.quantity = 1;
+	ds_list_add(global.inventory, item);
+	UpdateInventoryArray();
+}
+//UpdateInventoryArray();
+
+//show_message(global.inventory);
+//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
+//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
 
 // Slot positions
 slot_pos = 0; // Keybinds and mouse scroll

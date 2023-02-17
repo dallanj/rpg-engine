@@ -28,6 +28,9 @@ function Bob () : Npc () constructor {
 	sprites = frames.S;
 	dialog_current = 0; // Active script unlocked
 	
+	// Dialog for when completing a quest but inventory is full
+	//dialog_script[0][0] = [name,"left","Can you turn on your computer for me?",noone,noone,noone,spr_dialog_luna];
+	
 	// Script to start quest of turning on computer
 	dialog_script[0][0] = [name,"left","Can you turn on your computer for me?",noone,noone,noone,spr_dialog_luna];
 	dialog_script[0][1] = ["Daniel Lim","right",noone,noone,noone,[[1,"Yes","Yes I will",[["startQuest","turn_on_computer"],["unlockDialog",obj_dialog_daniel_computer, 1],["unlockDialog",obj_npc_bob, 2]]],[2,"Not right now","I will later",noone],[3,"Fuck off","NOPE!",[["unlockDialog", obj_npc_bob, 1]]]],spr_dialog_luna];
@@ -41,7 +44,8 @@ function Bob () : Npc () constructor {
 	dialog_script[2][1] = ["Daniel Lim","right","No not yet",noone,noone,noone,spr_dialog_luna];
 	
 	// After computer turned on - Quest complete
-	dialog_script[3][0] = [name,"left","Thanks for using your computer!",[["completeQuest","turn_on_computer"]],[[updateCurrency, 100],[updateInventory,[ITEM.TOAD,1]],[updateInventory,[ITEM.SHELL,6]]],noone,spr_dialog_luna];
+	//dialog_script[3][0] = [name,"left","Thanks for using your computer!",[["completeQuest","turn_on_computer"]],[[updateCurrency, 100],[updateInventory,[ITEM.TOAD,1]],[updateInventory,[ITEM.SHELL,6]]],noone,spr_dialog_luna];
+	dialog_script[3][0] = [name,"left","Thanks for using your computer!",[["completeQuest","turn_on_computer"],["unlockDialog", obj_dialog_daniel_computer, 2]],noone,noone,spr_dialog_luna];
 	dialog_script[3][1] = ["Daniel Lim","right","No problem!",[["unlockDialog", obj_npc_bob, 4]],noone,noone,spr_dialog_luna];
 	
 	// Regular dialog after quest complete

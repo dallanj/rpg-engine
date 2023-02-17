@@ -22,6 +22,9 @@ function DanielComputer () : DialogItem () constructor {
 	dialog_current = 0; // Active script unlocked
 	// Script 1
 	dialog_script[0][0] = ["Daniel Lim","right","This is my computer",noone,noone,noone,noone];
-	// Script 2 - Unlocked after starting quest from bob
+	// Script 2 - Unlocked after starting quest from luna
 	dialog_script[1][0] = ["Daniel Lim","right","Ok I turned it on",[["unlockDialog",obj_npc_bob,3]],noone,noone,noone];
+	// Script 3 - Unlocked after quest completed from luna
+	dialog_script[2][0] = ["Daniel Lim","right","Should I use my computer?",noone,noone,noone,noone];
+	dialog_script[2][1] = ["Daniel Lim","right","I should wait till after school",noone,noone,noone,noone];
 }

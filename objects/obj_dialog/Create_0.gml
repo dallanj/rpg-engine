@@ -14,6 +14,7 @@ current_speaker = "Daniel Lim";
 dialog_position = "right";
 display_choices = false;
 quest_complete = false;
+scripts_ran = false;
 
 // Centering based on view ports
 vw = view_xport[0] + view_wport[0] / 2;
@@ -34,7 +35,6 @@ text[text_current] = string_wrap(test[text_current], text_width);
 dialog_alpha = 0;
 max_alph = 1;
 alph_timer = .03;
-
 //word_count = string_count(" ",test);
 //words = ExplodeString(test);
 

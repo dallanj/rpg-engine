@@ -50,9 +50,10 @@ if (!global.dialog_exists) {
     
 		draw_text(text_x_pos, text_y_pos + (30 * count),string_hash_to_newline("Quest: "+string(current_quest.name)
 	        +"#started: "+string(current_quest.started)
-			+"#completed: "+string(current_quest.completed))
-	    );
+			+"#completed: "+string(current_quest.completed)
+			+"#rewards: "+string(current_quest.rewards)
+	    ));
 	    // Increment the quest count
-	    count = count + 3;
+	    count = count + 4;
 	}
 }

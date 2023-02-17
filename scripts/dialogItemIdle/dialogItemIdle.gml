@@ -21,10 +21,27 @@ function dialogItemIdle(event, stateLayer) {
 						dialog = instance_create_layer(x, y, "dialog", obj_dialog);
 						dialog.has_right_character = false;
 						dialog.text_current = 0;
-						dialog.text_last = array_length(self.obj_data.dialog_script[self.obj_data.dialog_current]) - 1;
-						for (i = 0; i <= dialog.text_last; i++) {
-							dialog.data[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i];
-							dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i][2];
+						
+						// Find quests by NPC
+						var quests = getQuestsByNpc(self.obj_data.object);
+
+						// Check if quests have unclaimed rewards
+						var num_of_rewards = hasUnclaimedRewards(quests);
+						
+						if (num_of_rewards > 0) {
+							var msg = "You have unclaimed rewards, come back when you have " + string(num_of_rewards) + " inventory spaces.";
+							dialog.text_last = 0;
+							dialog.data[0] = ["Daniel Lim","right",msg,noone,noone,noone,noone];
+							dialog.test[0] = msg;
+						} else {
+							// Reward player with unclaimed quest items
+							claimRewards(quests);
+							
+							dialog.text_last = array_length(self.obj_data.dialog_script[self.obj_data.dialog_current]) - 1;
+							for (i = 0; i <= dialog.text_last; i++) {
+								dialog.data[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i];
+								dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i][2];
+							}
 						}
 					}
 				}
