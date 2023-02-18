@@ -8,7 +8,6 @@ function Item () constructor {
 	description = "";
 	quantity = 1;
 	slot = 1;
-	
 	//Effect = function () {}
 }
 

@@ -16,7 +16,7 @@ function UpdateInventoryArray() {
 // Return an open slot in the inventory
 function GetOpenInventorySlot() {
 	for (var i = 0; i < global.unlocked_slots; i++) {
-		if (global.inventory_array[i] == 0) {
+		if (global.inventory_array[i] == 0) {		
 			return i + 1;
 		}
 	}

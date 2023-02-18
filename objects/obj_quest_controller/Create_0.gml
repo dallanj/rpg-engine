@@ -41,12 +41,12 @@ global.quests = {
 			reputation: noone,
 			items: [
 				{
-					item: ITEM.TOAD,
+					item: new Toad(),
 					quantity: 1,
 					rewarded: false
 				},
 				{
-					item: ITEM.SHELL,
+					item: new Shell(),
 					quantity: 4,
 					rewarded: false
 				},

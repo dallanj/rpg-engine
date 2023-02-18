@@ -14,4 +14,5 @@ function Npc () constructor {
 		S: [6, 7, 8],
 		A: [9, 10, 11]
 	};
+	unclaimed_rewards = [];
 }

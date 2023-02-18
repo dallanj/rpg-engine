@@ -1,91 +1,49 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description
+
+// Increase alpha by alpha_timer each frame
 if (dialog_alpha < max_alph) {
-	dialog_alpha += alph_timer; // Increase alpha by alpha_timer each frame
+	dialog_alpha += alph_timer;
 }
 
-// Detect if cursor is hovering over a slot
+// Detect if player is clicking the dialog arrow button
 if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), vw  + (dialog_width / 2) - 75, vh + 285,  vw  + (dialog_width / 2) - 40, (vh + 285) + 30) {
 	if (mouse_check_button_pressed(mb_left) && (dialog_alpha >= max_alph) && display_choices == false) {
-		// Skip dialog
-		var length = string_length(test[text_current]);
-		if (char_current < length) {
-			char_current = length;
-		} else {
-			text_current += 1;
-			if (text_current > text_last){
-			    instance_destroy(self);
-			} else {
-				// If choice based dialog
-				if (test[text_current] == noone) {
-					//show_message(data[text_current]);
-				
-					if (data[text_current][5] == noone) {
-						instance_destroy(self);	
-					} else {
-						display_choices = true;
-					}
-				
-				} else {
-					test[text_current] = string_wrap(test[text_current], text_width);
-					char_current = 0;
-				}
-			}
-		}
+		skipDialog();
 	}
 }
 
+// Choice selection dialog
 if (display_choices && (dialog_alpha >= max_alph)) {
-	for (i = 0; i < array_length(data[text_current][5]); i++) {
-		// Click choices
+	for (var i = 0; i < array_length(data[text_current][5]); i++) {
+		// Input from player
+		var input = false;
+		
+		// Click choices - mouse event
 		if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), text_x, text_y + (i * 32), text_x + (dialog_width) - 175, text_y + ((i + 1) * 32)) {
 			if (mouse_check_button_pressed(mb_left) && (dialog_alpha >= max_alph)) {
-				display_choices = false;
-				test[text_current] = data[text_current][5][i][2];
-				test[text_current] = string_wrap(test[text_current], text_width);
-				char_current = 0;
-				if (data[text_current][5][i][3] != noone) {
-					for (j = 0; j < array_length(data[text_current][5][i][3]); j++) {
-						
-						switch (data[text_current][5][i][3][j][0]) {
-							case "startQuest":
-								startQuest(data[text_current][5][i][3][j]);
-							break;
-							case "completeQuest":
-								completeQuest(data[text_current][5][i][3][j]);
-							break;
-							case "unlockDialog":
-								unlockDialog(data[text_current][5][i][3][j]);
-							break;
-						}
-					}
-				}
+				input = true;
 			}
 		}
 		
-		// Keybind choices
-		for (j = 0; j < array_length(data[text_current][5]); j++) {
+		// Keybind choices - keyboard event
+		for (var j = 0; j < array_length(data[text_current][5]); j++) {
 			if (keyboard_check_pressed(ord(data[text_current][5][i][0]))) {
-				display_choices = false;
-				test[text_current] = data[text_current][5][i][2];
-				test[text_current] = string_wrap(test[text_current], text_width);
-				char_current = 0;
-				if (data[text_current][5][i][3] != noone) {
-					for (j = 0; j < array_length(data[text_current][5][i][3]); j++) {			
-						switch (data[text_current][5][i][3][j][0]) {
-							case "startQuest":
-								startQuest(data[text_current][5][i][3][j]);
-							break;
-							case "completeQuest":
-								completeQuest(data[text_current][5][i][3][j]);
-							break;
-							case "unlockDialog":
-								unlockDialog(data[text_current][5][i][3][j]);
-							break;
-						}
-					}
-				}
+				input = true;
 			}
+		}
+		
+		// If player made a choice
+		if (input) {
+			// Run dialog scripts if there are any
+			if (data[text_current][5][i][3] != noone) {
+				runDialogScript(data[text_current][5][i][3]);	
+			}
+			
+			// Disable choice selection
+			display_choices = false;
+			test[text_current] = data[text_current][5][i][2];
+			test[text_current] = string_wrap(test[text_current], text_width);
+			char_current = 0;
 		}
 	}
 }

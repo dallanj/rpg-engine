@@ -36,12 +36,11 @@ if (!global.dialog_exists) {
 	// Draw quests (temporary placement)
 	count = 4;
 	var quest_name = "";
-	//show_message(variable_struct_get_names(global.quests));
+	
 	// Iterate over each key in the quest_list struct
 	var quest_keys = variable_struct_get_names(global.quests);
-	//show_message(string(quest_keys));
+	
 	for (var i = 0; i < array_length(quest_keys); i++) {
-		//show_message(global.quests.quest_keys[i]);
 	    // Get the current key
 	    var current_key = quest_keys[i];
     
@@ -50,7 +49,6 @@ if (!global.dialog_exists) {
     
 	    // Get the quest name and display it
 	    quest_name = current_quest.name;
-	    //draw_text(text_x_pos, text_y_pos + (30 * 0) * quest_count, "Quest " + ": " + quest_name);
     
 		draw_text(text_x_pos, text_y_pos + (30 * count),string_hash_to_newline("Quest: "+string(current_quest.name)
 	        +"#started: "+string(current_quest.started)

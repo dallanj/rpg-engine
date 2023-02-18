@@ -31,14 +31,13 @@ if (data[text_current][1] == "right") {
 draw_set_font(dialog_font);
 draw_set_color(c_white);
 if (dialog_alpha >= max_alph) {
-	
 	if (display_choices) {
-		//show_message(data[text_current][5][0]);
+		// Draw dialog script choices
 		for (i = 0; i < array_length(data[text_current][5]); i++) {
-			//show_message(data[text_current][5][i][1]);
 			draw_text(text_x, text_y + (i * 32),string(data[text_current][5][i][0]) + ". " + string(data[text_current][5][i][1]));
 		}
 	} else {
+		// Draw normal dialog
 		var _len = string_length(test[text_current]);
 		if (char_current < _len) {
 			char_current += char_speed;
@@ -48,12 +47,3 @@ if (dialog_alpha >= max_alph) {
 		draw_text_ext(text_x, text_y, _str, text_height + 10, dialog_width - 80);
 	}
 }
-
-//draw_text(6,30,"text_current = " + string(text_current));
-//draw_text(6,60,"text_last = " + string(text_last));
-
-//if (display_choices && (dialog_alpha >= max_alph)) {
-//	for (i = 0; i <= array_length(data[text_current][5]); i++) {
-//		draw_rectangle(text_x, text_y + (i * 32), text_x + (dialog_width) - 175, text_y + ((i + 1) * 32), true);
-//	}
-//}

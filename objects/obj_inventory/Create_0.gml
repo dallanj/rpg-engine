@@ -10,55 +10,37 @@
 global.inventory = ds_list_create();
 global.total_slots = 9;
 global.unlocked_slots = obj_player.player.inventory_slots;
+
+// Create inventory array
+UpdateInventoryArray();
+
+// Inventory sprite dimensions
 inventory_width = sprite_get_width(spr_inventory);
 inventory_height = sprite_get_height(spr_inventory);
 
 // Inventory Fonts
 quantity_font = font_add("Gaegu-Regular.ttf", 14, false, false, 32, 128);
-desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 18, false, false, 32, 128);
+desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 24, false, false, 32, 128);
 
 // Starting items for player
-//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-//UpdateInventoryArray();
-//for (var i = 0; i < global.total_slots; i ++) {
-	
-//	item = global.items[ITEM.GHOST];				
-//	// Return an open slot in the inventory
-//	var open_slot = GetOpenInventorySlot();
-//	item.slot = i + 1;
-//	item.quantity = 1;
-//	ds_list_add(global.inventory, item);
-//	UpdateInventoryArray();
-//}
-//UpdateInventoryArray();
-
-//show_message(global.inventory);
-//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-//ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
-//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
-//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
-//ds_list_add(global.inventory, global.items[ITEM.TOAD]);
+updateInventory(new Toad(), 1);
 
 // Slot positions
 slot_pos = 0; // Keybinds and mouse scroll
 slot_hover = 0; // Mouse hover over slot
 
 // Viewport positions
-//vw = (camera_get_view_width(view_camera[0]) / 2) - inventory_width / 2;
-//vh = camera_get_view_height(view_camera[0]) - inventory_height;
 vw = (view_xport[0] + view_wport[0] / 2) - (inventory_width / 2);
 vh = view_yport[0] + view_hport[0] / 2 + 250;
 
 // Item sprite dimensions
-item_width = 56; // 56
-item_height = 56; //56
+item_width = 56;
+item_height = 56;
 
 // Inventory HUD sprite starting positions (PX)
-start_width = 20; // 20
-start_height = 18; // 18
-gap = 8; // 8
+start_width = 20;
+start_height = 18;
+gap = 8;
 text_x_pos = 0;
 text_y_pos = 0;
 gap_between_slots = 0;
@@ -66,8 +48,8 @@ x_pos = 0;
 y_pos = 0;
 
 // Inventory selector
-selector_start_width = 16; // 16
-selector_start_height = 15; // 15
+selector_start_width = 16;
+selector_start_height = 15;
 
 // Hover tooltip
 tool_tip = false;

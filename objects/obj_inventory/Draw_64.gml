@@ -38,6 +38,9 @@ if (!global.dialog_exists) {
 
 	// Iterate through each item in inventory
 	for (var i = 0; i < global.unlocked_slots; i ++) {
+		// Update global inventory array with item slots
+		UpdateInventoryArray();
+	
 		// Item data
 		var item = global.inventory_array[i];
 	
@@ -63,7 +66,6 @@ if (!global.dialog_exists) {
 			text_y_pos = y_pos + (item_height / 2) + 4; // 10
 		
 			// Item quantity
-			//draw_text(text_x_pos, text_y_pos, string(item.quantity));
 			DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, item.quantity, quantity_font);
 		}
 	}
@@ -91,8 +93,8 @@ if (!global.dialog_exists) {
 			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos, c_black, c_white, tooltip_title, quantity_font);
 		
 			// Description of item
-			draw_set_font(quantity_font);
-			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos + 75, c_black, c_white, string(item.slot), quantity_font);
+			draw_set_font(desc_font);
+			DrawTextOutlined(tooltip_text_x_pos, tooltip_text_y_pos + 75, c_black, c_white, string(item.slot), desc_font);
 		
 		}
 	}
