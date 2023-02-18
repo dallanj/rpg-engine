@@ -6,7 +6,7 @@ if (!global.dialog_exists) {
 	UpdateInventoryArray();
 
 	// Create hover state for each inventory slot
-	for (var i = 0; i < global.total_slots; i ++) {
+	for (var i = 0; i < global.unlocked_slots; i ++) {
 	
 		// Get slot item from inventory array
 		var item = global.inventory_array[i];
@@ -35,7 +35,7 @@ if (!global.dialog_exists) {
 	}
 
 	// Inventory slot keybinds (1-9)
-	for (var i = 0; i < global.total_slots; i ++) {
+	for (var i = 0; i < global.unlocked_slots; i ++) {
 		if keyboard_check(ord(i + 1)) {
 			slot_pos = i;
 		}

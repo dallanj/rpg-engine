@@ -31,7 +31,7 @@ function dialogItemIdle(event, stateLayer) {
 						if (num_of_rewards > 0) {
 							var msg = "You have unclaimed rewards, come back when you have " + string(num_of_rewards) + " inventory spaces.";
 							dialog.text_last = 0;
-							dialog.data[0] = ["Daniel Lim","right",msg,noone,noone,noone,noone];
+							dialog.data[0] = ["Daniel Lim","right",msg,noone,noone,noone,spr_dialog_daniel];
 							dialog.test[0] = msg;
 						} else {
 							// Reward player with unclaimed quest items

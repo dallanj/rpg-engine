@@ -29,8 +29,12 @@ if (!global.dialog_exists) {
 	var currency = "Currency: " + string(global.currency);
 	DrawTextOutlined(text_x_pos, text_y_pos + (30 * 2), c_black, c_white, currency, desc_font);
 	
+	// Draw currency
+	var inventory_slots = "Inventory Slots: " + string(obj_player.player.inventory_slots);
+	draw_text(text_x_pos, text_y_pos + (30 * 3), inventory_slots);
+	
 	// Draw quests (temporary placement)
-	count = 3;
+	count = 4;
 	var quest_name = "";
 	//show_message(variable_struct_get_names(global.quests));
 	// Iterate over each key in the quest_list struct
@@ -51,9 +55,9 @@ if (!global.dialog_exists) {
 		draw_text(text_x_pos, text_y_pos + (30 * count),string_hash_to_newline("Quest: "+string(current_quest.name)
 	        +"#started: "+string(current_quest.started)
 			+"#completed: "+string(current_quest.completed)
-			+"#rewards: "+string(current_quest.rewards)
+			//+"#rewards: "+string(current_quest.rewards)
 	    ));
 	    // Increment the quest count
-	    count = count + 4;
+	    count = count + 3;
 	}
 }

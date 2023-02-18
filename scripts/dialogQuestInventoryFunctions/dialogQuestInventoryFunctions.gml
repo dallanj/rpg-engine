@@ -1,5 +1,5 @@
 /**
-* Unlock dialog scripts
+* Unlock dialog scripts for npc or items
 *
 * @param data (array)
 *
@@ -9,30 +9,87 @@ function unlockDialog(data) {
 	if (data != noone) {
 		with(data[1]) {
 			obj_data.dialog_current = data[2];
-			
 		}
 	}
 	
 	return;
 };
 
+/**
+* Increase currency by an amount
+*
+* @param amount (int)
+*
+* @return void
+*/
 function updateCurrency(amount) {
 	global.currency += amount;
+	
+	return;
 };
 
+/**
+* Unlock a number of inventory slots
+*
+* @param amount (int)
+*
+* @return void
+*/
+function unlockInventorySlots(amount) {
+	obj_player.player.inventory_slots += amount;
+	global.unlocked_slots = obj_player.player.inventory_slots;
+	
+	return;
+};
+
+/**
+* Increase reputation by an amount
+*
+* @param amount (int)
+*
+* @return void
+*/
 function updateReputation(amount) {
 	global.reputation += amount;
+	
+	return;
 };
 
+/**
+* Add item to inventory
+*
+* @param item (int/object)
+* @param add (boolean)
+* @param quantity (int)
+*
+* @return void
+*/
 function updateInventory(item, add, quantity) {
-	//show_message(string(item) + " item  " + string(add) + " " + string(quantity));
 	AddItem(item, quantity, true);
+	
+	return;
 };
 
+/**
+* Begin a quest
+*
+* @param data (array)
+*
+* @return void
+*/
 function startQuest(data) {
 	global.quests[$ data[1]].started = true;
+	
+	return;
 };
 
+/**
+* Return all quests by a specific npc or item
+*
+* @param npc (int/object)
+*
+* @return array
+*/
 function getQuestsByNpc(npc) {
 	var quests = [];
 	var keys = variable_struct_get_names(global.quests);
@@ -48,6 +105,13 @@ function getQuestsByNpc(npc) {
 	return quests;
 };
 
+/**
+* Claim unclaimed rewards from a previously completed quest
+*
+* @param quests (array)
+*
+* @return void
+*/
 function claimRewards(quests) {
 	// Find an open slot
 	var open_slots = GetOpenInventorySlot();
@@ -86,8 +150,17 @@ function claimRewards(quests) {
 			}
 		}
 	}
+	
+	return;
 };
 
+/**
+* Return the amount of unclaimed rewards still owed from completing a quest
+*
+* @param quests (array)
+*
+* @return int
+*/
 function hasUnclaimedRewards(quests) {
 	var num_of_rewards = 0;
 	
@@ -113,18 +186,23 @@ function hasUnclaimedRewards(quests) {
 	return num_of_rewards;
 };
 
+/**
+* Completes a quest and rewards the player
+*
+* @param data (array)
+*
+* @return void
+*/
 function completeQuest(data) {
 	global.quests[$ data[1]].completed = true;
 	
-	//show_message(global.quests[$ data[1]].rewards);
 	var rewards;
 	rewards = global.quests[$ data[1]].rewards;
+	
 	// Iterate over each key in the quest_list struct
 	var keys = variable_struct_get_names(rewards);
-	//show_message(keys);
-	//show_message(string(quest_keys));
+	
 	for (var i = 0; i < array_length(keys); i++) {
-		//show_message(global.quests.quest_keys[i]);
 	    // Get the current key
 	    var current_key = keys[i];
     
@@ -141,6 +219,14 @@ function completeQuest(data) {
 					}
 				}
 			break;
+			case "inventory":
+				if (rewards[$ current_key] != noone) {
+					if (!rewards[$ current_key].rewarded) {
+						unlockInventorySlots(rewards[$ current_key].quantity);
+						rewards[$ current_key].rewarded = true;
+					}
+				}
+			break;
 			case "reputation":
 				if (rewards[$ current_key] != noone) {
 					if (!rewards[$ current_key].rewarded) {
@@ -151,7 +237,6 @@ function completeQuest(data) {
 			break;
 			case "items":
 				if (rewards[$ current_key] != noone) {
-					//show_message("items: " +string(rewards[$ current_key]));
 					for (var items = 0; items < array_length(rewards[$ current_key]); items++) {
 						if (!rewards[$ current_key][items].rewarded) {
 							// Update global inventory array with item slots

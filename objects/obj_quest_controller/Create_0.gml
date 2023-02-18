@@ -13,9 +13,12 @@ global.quests = {
 				quantity: 500,
 				rewarded: false
 			},
+			inventory: {
+				quantity: 3,
+				rewarded: false,
+			},
 			reputation: noone,
 			items: noone,
-			//[[updateCurrency, 100],[updateInventory,[ITEM.TOAD,1]],[updateInventory,[ITEM.SHELL,6]]]
 		}
     },
     turn_on_computer: {
@@ -31,8 +34,11 @@ global.quests = {
 				quantity: 100,
 				rewarded: false
 			},
+			inventory: {
+				quantity: 3,
+				rewarded: false,
+			},
 			reputation: noone,
-			items: noone,
 			items: [
 				{
 					item: ITEM.TOAD,
@@ -45,7 +51,6 @@ global.quests = {
 					rewarded: false
 				},
 			]
-			//[[updateCurrency, 100],[updateInventory,[ITEM.TOAD,1]],[updateInventory,[ITEM.SHELL,6]]]
 		}
     },
 };

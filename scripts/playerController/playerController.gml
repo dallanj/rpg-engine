@@ -11,7 +11,7 @@ function Player() constructor {
 		S: [0, 1, 2, 3],
 		D: [8, 9, 10, 11],
 	};
-	
 	keys = []; // Current keys being pressed
 	sprites = frames.S;
+	inventory_slots = 3;
 }

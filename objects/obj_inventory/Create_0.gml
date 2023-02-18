@@ -9,6 +9,7 @@
 // Create inventory
 global.inventory = ds_list_create();
 global.total_slots = 9;
+global.unlocked_slots = obj_player.player.inventory_slots;
 inventory_width = sprite_get_width(spr_inventory);
 inventory_height = sprite_get_height(spr_inventory);
 
@@ -18,17 +19,17 @@ desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 18, false, false, 32,
 
 // Starting items for player
 //ds_list_add(global.inventory, global.items[ITEM.GHOST]);
-UpdateInventoryArray();
-for (var i = 0; i < global.total_slots; i ++) {
+//UpdateInventoryArray();
+//for (var i = 0; i < global.total_slots; i ++) {
 	
-	item = global.items[ITEM.GHOST];				
-	// Return an open slot in the inventory
-	var open_slot = GetOpenInventorySlot();
-	item.slot = i + 1;
-	item.quantity = 1;
-	ds_list_add(global.inventory, item);
-	UpdateInventoryArray();
-}
+//	item = global.items[ITEM.GHOST];				
+//	// Return an open slot in the inventory
+//	var open_slot = GetOpenInventorySlot();
+//	item.slot = i + 1;
+//	item.quantity = 1;
+//	ds_list_add(global.inventory, item);
+//	UpdateInventoryArray();
+//}
 //UpdateInventoryArray();
 
 //show_message(global.inventory);

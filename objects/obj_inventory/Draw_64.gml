@@ -12,7 +12,22 @@ if (!global.dialog_exists) {
 	y_pos = vh + selector_start_height;
 	var selector_gap_between_slots = (slot_pos * gap) + (slot_pos * item_width);
 	draw_sprite(spr_inventory_selected, 0, x_pos + selector_gap_between_slots, y_pos);
-
+	
+	// Draw disabled sprite on locked inventory slots
+	for (var i = 0; i < global.total_slots; i ++) {
+		if (global.unlocked_slots <= i) {
+			// Initial slot positions
+			x_pos = start_width + vw;
+			y_pos = vh + start_height;
+	
+			// Slot width calculations
+			gap_between_slots = (i * gap) + (item_width * i);
+		
+			// Draw each item in slots
+			draw_sprite(spr_inventory_locked_slot, 0, x_pos + gap_between_slots, y_pos);
+		}
+	}
+	
 	// Draw slot keybinds
 	for (var i = 0; i < global.total_slots; i ++) {
 		gap_between_slots = (i * gap) + (item_width * i);
@@ -22,7 +37,7 @@ if (!global.dialog_exists) {
 	}
 
 	// Iterate through each item in inventory
-	for (var i = 0; i < global.total_slots; i ++) {
+	for (var i = 0; i < global.unlocked_slots; i ++) {
 		// Item data
 		var item = global.inventory_array[i];
 	

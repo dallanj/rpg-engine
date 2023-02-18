@@ -1,9 +1,9 @@
 // Update global inventory array with item slots
 function UpdateInventoryArray() {
 	// Reset inventory array positions
-	global.inventory_array = array_create(global.total_slots, false);
+	global.inventory_array = array_create(global.unlocked_slots, false);
 	
-	for (var i = 0; i < global.total_slots; i ++) {
+	for (var i = 0; i < global.unlocked_slots; i ++) {
 		var item = ds_list_find_value(global.inventory, i);
 	
 		if (item) {
@@ -15,7 +15,7 @@ function UpdateInventoryArray() {
 
 // Return an open slot in the inventory
 function GetOpenInventorySlot() {
-	for (var i = 0; i < global.total_slots; i++) {
+	for (var i = 0; i < global.unlocked_slots; i++) {
 		if (global.inventory_array[i] == 0) {
 			return i + 1;
 		}
@@ -56,7 +56,7 @@ function AddItem(object) {
 	open_slot = GetOpenInventorySlot();
 
 	// Items that are not stackable
-	if (inventory_size < global.total_slots && !object.item.stackable) {
+	if (inventory_size < global.unlocked_slots && !object.item.stackable) {
 		object.item.slot = open_slot;
 		ds_list_add(global.inventory, object.item);
 		instance_destroy(object);
@@ -81,7 +81,7 @@ function AddItem(object) {
 		// If item is in inventory
 		if (in_inventory) {
 			instance_destroy(object);
-		} else if (!in_inventory && inventory_size < global.total_slots) {
+		} else if (!in_inventory && inventory_size < global.unlocked_slots) {
 			// If item is not in the inventory and slots are open				
 			object.item.quantity = object.quantity;
 			object.item.slot = open_slot;
@@ -93,7 +93,7 @@ function AddItem(object) {
 
 // Draw the inventory array for testing purposes
 function DrawInventoryArray() {
-	for (var i = 0; i < global.total_slots; i++) {
+	for (var i = 0; i < global.unlocked_slots; i++) {
 		var slot_position = string("Slot ") + string(i + 1) + string(": ");
 		draw_set_color(c_black);
 		if (global.inventory_array[i] == 0) {
