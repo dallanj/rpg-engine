@@ -20,7 +20,7 @@ inventory_height = sprite_get_height(spr_inventory);
 
 // Inventory Fonts
 quantity_font = font_add("Gaegu-Regular.ttf", 14, false, false, 32, 128);
-desc_font = font_add("Fredoka-VariableFont_wdth,wght.ttf", 24, false, false, 32, 128);
+desc_font = font_add("Fredoka-SemiBold.ttf", 24, false, false, 32, 128);
 
 // Starting items for player
 updateInventory(new Toad(), 1);
@@ -55,4 +55,11 @@ selector_start_height = 15;
 tool_tip = false;
 tool_tip_x = 0;
 tool_tip_y = 0;
-alarm[0] = 1; // Used to remove drawn tooltip sprite
+
+// Fade effect
+alpha = 0;
+max_alph = 1;
+alph_timer = .05;
+
+// Used to remove drawn tooltip sprite
+alarm[0] = 1;

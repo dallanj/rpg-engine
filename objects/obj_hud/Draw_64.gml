@@ -3,7 +3,8 @@ draw_set_font(font_hud);
 
 if (!global.dialog_exists) {
 	// Draw HUD
-
+	draw_text(50,250,"list size top: " + string(ds_list_size(global.alerts_top)));
+	draw_text(50,230,"list size bottom: " + string(ds_list_size(global.alerts_bottom)));
 	// For every 60 minutes; update hour
 	if (global.minutes == 60) updateHour();
 
@@ -33,29 +34,29 @@ if (!global.dialog_exists) {
 	var inventory_slots = "Inventory Slots: " + string(obj_player.player.inventory_slots);
 	draw_text(text_x_pos, text_y_pos + (30 * 3), inventory_slots);
 	
-	// Draw quests (temporary placement)
-	count = 4;
-	var quest_name = "";
+	//// Draw quests (temporary placement)
+	//count = 4;
+	//var quest_name = "";
 	
-	// Iterate over each key in the quest_list struct
-	var quest_keys = variable_struct_get_names(global.quests);
+	//// Iterate over each key in the quest_list struct
+	//var quest_keys = variable_struct_get_names(global.quests);
 	
-	for (var i = 0; i < array_length(quest_keys); i++) {
-	    // Get the current key
-	    var current_key = quest_keys[i];
+	//for (var i = 0; i < array_length(quest_keys); i++) {
+	//    // Get the current key
+	//    var current_key = quest_keys[i];
     
-	    // Access the struct at the current key
-	    var current_quest = global.quests[$ current_key];
+	//    // Access the struct at the current key
+	//    var current_quest = global.quests[$ current_key];
     
-	    // Get the quest name and display it
-	    quest_name = current_quest.name;
+	//    // Get the quest name and display it
+	//    quest_name = current_quest.name;
     
-		draw_text(text_x_pos, text_y_pos + (30 * count),string_hash_to_newline("Quest: "+string(current_quest.name)
-	        +"#started: "+string(current_quest.started)
-			+"#completed: "+string(current_quest.completed)
-			//+"#rewards: "+string(current_quest.rewards)
-	    ));
-	    // Increment the quest count
-	    count = count + 3;
-	}
+	//	draw_text(text_x_pos, text_y_pos + (30 * count),string_hash_to_newline("Quest: "+string(current_quest.name)
+	//        +"#started: "+string(current_quest.started)
+	//		+"#completed: "+string(current_quest.completed)
+	//		//+"#rewards: "+string(current_quest.rewards)
+	//    ));
+	//    // Increment the quest count
+	//    count = count + 3;
+	//}
 }

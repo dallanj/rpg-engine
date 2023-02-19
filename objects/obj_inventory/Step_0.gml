@@ -40,4 +40,14 @@ if (!global.dialog_exists) {
 			slot_pos = i;
 		}
 	}
+	
+	// Fade in until max alpha is reached
+	if (alpha < max_alph) {
+		alpha += alph_timer;
+	}
+} else {
+	// Fade out when dialog is being used till 0
+	if (alpha > 0) {
+		alpha -= alph_timer;
+	}
 }

@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "hudController",
+  "name": "AlertController",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "HUD",
-    "path": "folders/Scripts/HUD.yy",
+    "name": "Controllers",
+    "path": "folders/Scripts/Controllers.yy",
   },
 }

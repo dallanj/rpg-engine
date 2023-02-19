@@ -1,7 +1,9 @@
 /// @description Draw Inventory HUD
 if (!global.dialog_exists) {
+	// Fade in effect for all drawn sprites
+	draw_set_alpha(alpha);
 	// Draw inventory HUD
-	draw_sprite_ext(spr_inventory, 0, vw, vh, 1, 1, 0, -1, 0.5);
+	draw_sprite_ext(spr_inventory, 0, vw, vh, 1, 1, 0, -1, alpha);
 
 	// Text colors
 	draw_set_color(c_purple);
@@ -98,4 +100,7 @@ if (!global.dialog_exists) {
 		
 		}
 	}
+	
+	// Reset all other drawn sprites back to full opacity
+	draw_set_alpha(1);
 }

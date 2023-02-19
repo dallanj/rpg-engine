@@ -6,6 +6,8 @@ global.hours = 22; // Hours 0 - 24
 global.minutes = 60; // Minutes 0 - 60
 global.reputation = 100; // Reputation 0-100
 global.currency = 0; // # of dollars
+global.alerts_top = ds_list_create();
+global.alerts_bottom = ds_list_create();
 
 // HUD sprite dimensions
 hud_width = sprite_get_width(spr_hud);
