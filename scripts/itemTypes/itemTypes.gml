@@ -1,4 +1,17 @@
-function Toad () : Item () constructor {
+function gameItem (amount = 1) constructor {
+	name = "";
+	price = 0;
+	stackable = false;
+	sprite = "";
+	inv_sprite = "";
+	object = "";
+	description = "";
+	quantity = amount;
+	slot = 1;
+	//Effect = function () {}
+}
+
+function toad () : gameItem () constructor {
 	id = 1;
 	name = "Toad mushroom";
 	description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
@@ -10,7 +23,7 @@ function Toad () : Item () constructor {
 	//}
 }
 
-function Ghost () : Item () constructor {
+function ghost () : gameItem () constructor {
 	id = 2;
 	name = "Ghost";
 	description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
@@ -20,7 +33,7 @@ function Ghost () : Item () constructor {
 	object = obj_item_ghost;
 }
 
-function Shell () : Item () constructor {
+function shell (amount = 1) : gameItem (amount) constructor {
 	id = 3;
 	name = "Red shell";
 	description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
@@ -31,6 +44,6 @@ function Shell () : Item () constructor {
 	object = obj_item_shell;
 }
 
-function Health_Potion () : Potion () constructor {
-	//
-}
+//function Health_Potion () : Potion () constructor {
+//	//
+//}

@@ -19,16 +19,16 @@ if (!global.dialog_exists) {
 	// Draw day of the week and current time
 	var time = day + ", " + hours + ":" + minutes;
 	var date = " (day " + string(global.total_days) + ")";
-	DrawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, time, desc_font);
-	DrawTextOutlined(text_x_pos + 175, text_y_pos + (30 * 0), c_black, c_white, date, desc_font);
+	drawTextOutlined(text_x_pos, text_y_pos, c_black, c_white, time, desc_font);
+	drawTextOutlined(text_x_pos + 175, text_y_pos + (30 * 0), c_black, c_white, date, desc_font);
 
 	// Draw reputation bar
 	var reputation = "Reputation: " + string(global.reputation);
-	DrawTextOutlined(text_x_pos, text_y_pos + (30 * 1), c_black, c_white, reputation, desc_font);
+	drawTextOutlined(text_x_pos, text_y_pos + (30 * 1), c_black, c_white, reputation, desc_font);
 
 	// Draw currency
 	var currency = "Currency: " + string(global.currency);
-	DrawTextOutlined(text_x_pos, text_y_pos + (30 * 2), c_black, c_white, currency, desc_font);
+	drawTextOutlined(text_x_pos, text_y_pos + (30 * 2), c_black, c_white, currency, desc_font);
 	
 	// Draw currency
 	var inventory_slots = "Inventory Slots: " + string(obj_player.player.inventory_slots);

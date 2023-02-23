@@ -27,6 +27,6 @@ if (!alert_active) {
 		
 	// Delete once faded out
 	if (alpha <= 0) {
-		DestroyAlert(alert);
+		destroyAlert(alert);
 	}
 }

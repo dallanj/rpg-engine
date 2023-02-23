@@ -1,4 +1,3 @@
 /// @description 
-//item = global.items[ITEM.TOAD];
-item = new Toad();
+item = TOAD;
 depth = -bbox_bottom;

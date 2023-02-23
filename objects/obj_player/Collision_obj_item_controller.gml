@@ -1,2 +1,2 @@
 /// @description Add item to inventory 
-AddItem(other);
+updateInventory(other, true);

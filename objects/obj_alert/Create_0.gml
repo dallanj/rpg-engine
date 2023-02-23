@@ -1,4 +1,4 @@
-alert = new Alert();
+alert = ALERT;
 
 // Viewport positions
 vw = noone;

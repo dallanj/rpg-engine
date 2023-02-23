@@ -71,26 +71,29 @@ function updateReputation(amount) {
 *
 * @return boolean
 */
-function updateInventory(item, quantity) {
+function updateInventory(object, exists = false) {
+	// Set the item to the object if it already exists, and its getting picked up off ground
+	var item = exists ? object.item : object;
+	
 	var inventory_size = ds_list_size(global.inventory);
 	
 	// Has item been awarded to the player
-	var rewarded = false;
+	var result = false;
 	
 	// Update global inventory array with item slots
-	UpdateInventoryArray();
+	updateInventoryArray();
 	
 	// Return an open slot in the inventory
-	var open_slot = GetOpenInventorySlot();
+	var open_slot = getOpenInventorySlot();
 							
 	// Existing inventory item
 	var inv_item;
-							
+				
 	// Add non stackable item to an empty inventory slot
 	if (!is_undefined(open_slot) && !item.stackable) {
 		item.slot = open_slot;
 		ds_list_add(global.inventory, item);
-		rewarded = true;
+		result = true;
 	}
 							
 	// If the item is stackable
@@ -112,18 +115,23 @@ function updateInventory(item, quantity) {
 								
 		// Update existing item's quantity in the inventory
 		if (in_inventory) {
-			inv_item.quantity += quantity;
-			rewarded = true;
+			inv_item.quantity += item.quantity;
+			result = inv_item;
 		}
 								
 		// Insert stackable item to an empty inventory slot
 		if (!in_inventory && !is_undefined(open_slot)) {
-			item.quantity = quantity;
 			item.slot = open_slot;
 			ds_list_add(global.inventory, item);
-			rewarded = true;
+			result = true;
 		}
 	}
 	
-	return rewarded;
+	if (exists && result != false) {
+		storeAlert(Action.UpdateInventory, item);
+		instance_destroy(object);
+	}
+	
+	// True, false, struct (the item data wi)
+	return result;
 };

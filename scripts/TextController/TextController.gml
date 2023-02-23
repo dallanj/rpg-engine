@@ -10,7 +10,7 @@
 *
 * @return void
 */
-function DrawTextOutlined(xx, yy, outline_color, string_color, string, font) {
+function drawTextOutlined(xx, yy, outline_color, string_color, string, font) {
 	draw_set_font(font);
 	
 	// Outline
@@ -38,7 +38,7 @@ function DrawTextOutlined(xx, yy, outline_color, string_color, string, font) {
 *
 * @return array
 */
-function ExplodeString(text) {
+function explodeString(text) {
 	var char_string = 0;
 	
 	if (string_pos(" ", text) == 0) {
@@ -64,7 +64,7 @@ function ExplodeString(text) {
 *
 * @return string
 */
-function GenerateGuid() {
+function generateGuid() {
 	var guid = "";
 	
 	for (var i = 0; i < 32; i++) {

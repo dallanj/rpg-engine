@@ -22,11 +22,15 @@ function dialogItemIdle(event, stateLayer) {
 						dialog.has_right_character = false;
 						dialog.text_current = 0;
 						
+						var unclaimed_rewards = self.obj_data.unclaimed_rewards;
+						
 						// Find quests by NPC
 						var quests = getQuestsByNpc(self.obj_data.object);
 						
 						// Reward player with unclaimed items
-						claimRewards(self.obj_data.unclaimed_rewards);
+						if (array_length(unclaimed_rewards) > 0) {
+							unclaimed_rewards = claimRewards(unclaimed_rewards);
+						}
 						
 						// Reward player with unclaimed quest items
 						claimQuestRewards(quests);
@@ -35,10 +39,12 @@ function dialogItemIdle(event, stateLayer) {
 						var num_of_quest_rewards = hasUnclaimedQuestRewards(quests);
 						
 						// Check if npc has unclaimed rewards
-						var num_of_rewards = hasUnclaimedRewards(self.obj_data.unclaimed_rewards);
+						var num_of_rewards = hasUnclaimedRewards(unclaimed_rewards);
 						
-						if ((num_of_quest_rewards + num_of_rewards) > 0) {
-							var msg = "You have unclaimed rewards, come back when you have " + string(num_of_rewards) + " inventory spaces.";
+						var total_rewards = num_of_quest_rewards + num_of_rewards;
+						
+						if (total_rewards > 0) {
+							var msg = "You have unclaimed rewards, come back when you have " + string(total_rewards) + " inventory spaces.";
 							dialog.text_last = 0;
 							dialog.data[0] = ["Daniel Lim","right",msg,noone,noone,noone,spr_dialog_daniel];
 							dialog.test[0] = msg;

@@ -19,58 +19,60 @@
 *
 * @return void
 */
-function StoreAlert(type, data) {
+function storeAlert(type, data) {
 	
 	var title, new_instance;
 	
 	// Default size and placementections for alerts
 	var size = "small";
 	var placement = "left-bottom";
+	var item = noone;
 	
 	switch (type) {
-		case "startQuest":
-			title = "Quest Started: " + string(global.quests[$ data[1]].name);
+		case Action.StartQuest:
+			title = "Quest Started: " + string(data.name);
 			size = "medium";
 			placement = "center-top";
 		break;
-		case "completeQuest":
-			title = "Quest Completed: " + string(global.quests[$ data[1]].name);
+		case Action.CompleteQuest:
+			title = "Quest Completed: " + string(data.name);
 			size = "medium";
 			placement = "center-top";
 		break;
-		case "unlockDialog":
-			title = string(data.obj_data.name) + " has some info for you!";
+		case Action.UnlockDialog:
+			title = string(data.name) + " has some info for you!";
 			size = "medium";
 			placement = "center-top";
+			return;
 		break;
-		case "currency":
+		case Action.UpdateCurrency:
 			title = "Earned " + string(data) + " currency!";
 		break;
-		case "inventory":
+		case Action.UnlockSlots:
 			title = "Unlocked " + string(data) + " slots!";
 		break;
-		case "reputation":
+		case Action.UpdateReputation:
 			title = "Earned " + string(data) + " reputation!";
 		break;
-		case "unclaimedRewards":
-			title = string(data.obj_data.name) + " has rewards for you!";
+		case Action.UnclaimedRewards:
+			title = string(data.name) + " has rewards for you!";
 			size = "medium";
 			placement = "center-top";
 		break;
-		case "items":
-			if (variable_struct_exists(data, "item")) {
-				if (data.item.stackable) {
-					title = "Earned "+string(data.quantity)+" x "+string(data.item.name)+"s";	
-				} else {
-					title = "Earned "+string(data.item.name);
-				}
+		case Action.UpdateInventory:
+			item = data;
+			
+			if (data.stackable) {
+				var result = updateAlert(Action.UpdateInventory, data);
+				
+				// If the alert exists and updated then do not create a new alert
+				if (result) return;
+				
+				title = string(data.name) + " x "+string(data.quantity);
 			} else {
-				if (data.stackable) {
-					title = "Earned "+string(data.quantity)+" x "+string(data.name)+"s";	
-				} else {
-					title = "Earned "+string(data.name);
-				}	
+				title = data.name;
 			}
+			
 		break;
 	}
 	
@@ -82,6 +84,8 @@ function StoreAlert(type, data) {
 		alert.type = type;
 		alert.size = size;
 		alert.placement = placement;
+		alert.item = item;
+		alert.quantity = item != noone ? item.quantity : noone;
 	}
 	
 	// Join new alert with all active alerts
@@ -95,6 +99,36 @@ function StoreAlert(type, data) {
 };
 
 /**
+* Update existing alert
+*
+* @param type (string)
+* @param data (mixed)
+*
+* @return void
+*/
+function updateAlert(type, data) {
+	var updated = false;
+	var alert;
+	
+	// Find the alert if it exists and update the quantity
+	for (var i = 0; i < ds_list_size(global.alerts_bottom); i ++) {
+		alert = ds_list_find_value(global.alerts_bottom, i);
+		
+		// Update the alert message with additional item quantity
+		if (alert.item != noone && alert.item.name == data.name) {
+			var new_quantity = alert.quantity + data.quantity;
+			
+			alert.title = string(data.name) + " x "+string(new_quantity);
+			alert.quantity = new_quantity;
+			updated = true;
+			break;
+		}
+	}
+	
+	return updated;
+};
+
+/**
 * Removes alert after showing the player
 *
 * @param type (string)
@@ -102,7 +136,7 @@ function StoreAlert(type, data) {
 *
 * @return void
 */
-function DestroyAlert(alert) {
+function destroyAlert(alert) {
 	var position;
 	
 	// Get index position of alert within alerts list
@@ -128,7 +162,7 @@ function DestroyAlert(alert) {
 *
 * @return void
 */
-function ClearAlerts() {
+function clearAlerts() {
 	
 	// Clear data list of active alerts
 	if (global.alerts_top) {

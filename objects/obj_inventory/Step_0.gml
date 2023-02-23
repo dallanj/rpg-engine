@@ -3,7 +3,7 @@ global.dialog_exists = instance_exists(obj_dialog);
 
 if (!global.dialog_exists) {
 	// Update global inventory array with item slots
-	UpdateInventoryArray();
+	updateInventoryArray();
 
 	// Create hover state for each inventory slot
 	for (var i = 0; i < global.unlocked_slots; i ++) {

@@ -12,7 +12,7 @@ global.total_slots = 9;
 global.unlocked_slots = obj_player.player.inventory_slots;
 
 // Create inventory array
-UpdateInventoryArray();
+updateInventoryArray();
 
 // Inventory sprite dimensions
 inventory_width = sprite_get_width(spr_inventory);
@@ -23,7 +23,7 @@ quantity_font = font_add("Gaegu-Regular.ttf", 14, false, false, 32, 128);
 desc_font = font_add("Fredoka-SemiBold.ttf", 24, false, false, 32, 128);
 
 // Starting items for player
-updateInventory(new Toad(), 1);
+updateInventory(TOAD);
 
 // Slot positions
 slot_pos = 0; // Keybinds and mouse scroll

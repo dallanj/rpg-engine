@@ -1,18 +1,16 @@
 /**
 * Unlock dialog scripts for npc or items
 *
-* @param data (array)
+* @param data (struct)
 *
 * @return void
 */
 function unlockDialog(data) {
 	var result = false;
 	
-	if (data != noone) {
-		with(data[1]) {
-			obj_data.dialog_current = data[2];
-			result = true;
-		}
+	with(data.npc) {
+		obj_data.dialog_current = data.dialog;
+		result = true;
 	}
 	
 	return result;
@@ -59,116 +57,100 @@ function skipDialog() {
 /**
 * Run multiple functions after excuting a dialog script
 *
-* @param data (array)
+* @param dialog_script (array)
 *
 * @return boolean
 */
-function runDialogScript(data) {
-	if (!is_array(data)) {
+function runDialogScript(dialog_script) {
+	if (!is_array(dialog_script)) {
 		return false;	
 	}
 	
 	// Run multiple functions from the dialog script data
-	for (var i = 0; i < array_length(data); i++) {	
-		switch (data[i][0]) {
-			case "startQuest":
-				if (!data[i][2]) {
-					// Did the script run successfully
-					var result = startQuest(data[i]);
-				
-					if (result) {
-						data[i][2] = true;
-						StoreAlert("startQuest", data[i]);	
-					}
-				}
-			break;
-			case "completeQuest":
-				if (!data[i][2]) {
-					// Did the script run successfully
-					var result = completeQuest(data[i]);
-				
-					if (result) {
-						// Update the scripts use status to true
-						data[i][2] = true;
-						//StoreAlert("completeQuest", data[i]);	
-					}
-				}
-			break;
-			case "unlockDialog":
-				if (!data[i][3]) {
-					// Did the script run successfully
-					var result = unlockDialog(data[i]);
+	for (var i = 0; i < array_length(dialog_script); i++) {
+		var data = dialog_script[i]
+		
+		// Reward the player for quest completion
+		if (!data.rewarded) {
+			// Did the script run successfully
+			var rewarded = false;
+			
+			// Type of reward and it's action
+			var action = data.action;
+			
+			// Value of reward
+			var value = data.value;
+			
+			// Data to be used for alert
+			var alert_data = value;
+			var alert_type = action;
+			
+			switch (action) {
+				case Action.StartQuest:
+					rewarded = startQuest(value);
+					show_debug_message(rewarded);
+				break;
+				case Action.CompleteQuest:
+					var quest = completeQuest(value);
 					
-					if (result) {
-						// Update the scripts use status to true
-						data[i][3] = true;
-						StoreAlert("unlockDialog", data[i][1]);
+					if (is_struct(quest)) {
+						alert_data = quest;
+						rewarded = true;
 					}
-				}
-			break;
-			case "currency":
-				if (!data[i][2]) {
-					// Did the script run successfully
-					var result = updateCurrency(data[i][1]);
+				break;
+				case Action.UnlockDialog:
+					rewarded = unlockDialog(value);
 					
-					if (result) {
-						// Update the scripts use status to true
-						data[i][2] = true;
-						StoreAlert("currency", data[i][1]);
-					}
-				}
-			break;
-			case "inventory":
-				if (!data[i][2]) {
-					// Did the script run successfully
-					var result = unlockInventorySlots(data[i][1]);
+					alert_data = value.npc.obj_data;
+				break;
+				case Action.UpdateCurrency:
+					rewarded = updateCurrency(value);
+				break;
+				case Action.UnlockSlots:
+					var amount = unlockInventorySlots(value);
 					
-					// Update the scripts use status to true
-					data[i][2] = true;
-						
-					if (result > 0) {
-						StoreAlert("inventory", result);
+					// Set the value of the reward to the number of slots unlocked
+					if (amount > 0) {
+						alert_data = amount;
+						rewarded = true;
 					}
-				}
-			break;
-			case "reputation":
-				if (!data[i][2]) {
-					// Did the script run successfully
-					var result = updateReputation(data[i][1]);
+				break;
+				case Action.UpdateReputation:
+					rewarded = updateReputation(value);
+				break;
+				case Action.UpdateInventory:
+					// Has the item been awarded to the player
+					var result = updateInventory(value.item); 
 					
-					if (result) {
-						// Update the scripts use status to true
-						data[i][2] = true;
-						StoreAlert("reputation", data[i][1]);
-					}
-				}
-			break;
-			case "items":
-				for (var items = 0; items < array_length(data[i][1]); items++) {
-					if (!data[i][1][items].rewarded) {
-						// Has the item been awarded to the player
-						var awarded = updateInventory(data[i][1][items].item, data[i][1][items].quantity);
-							
-						if (!awarded) {
-							// Add item to the npc's unclaimed rewards for the player to claim later
-							var unclaimed_reward = {
-								item: data[i][1][items].item,
-								quantity: data[i][1][items].quantity,
-								rewarded: false
-							}
-							array_push(data[i][2].obj_data.unclaimed_rewards,unclaimed_reward);
-							
-							// Alert user of unclaimed reward
-							StoreAlert("unclaimedRewards", data[i][2]);
-						} else {
-							// Alert user of rewarded item
-							StoreAlert("items",data[i][1][items].item);
+					if (!result) {
+						// Add item to the npc's unclaimed rewards for the player to claim later
+						var unclaimed_reward = {
+							action: action,
+							value: value.item,
+							rewarded: false
 						}
 						
-						data[i][1][items].rewarded = true;
+						var npc = value.npc.obj_data;
+						alert_data = npc;
+						alert_type = Action.UnclaimedRewards;
+						
+						// Item is now within the npc's unclaimed rewards for the player to claim later
+						array_push(npc.unclaimed_rewards, unclaimed_reward);
+					} else if (is_struct(result)) {
+						alert_data = result;
+					} else {
+						alert_data = value.item;
 					}
-				}
-			break;
+					
+					rewarded = true;
+				break;
+			}
+			
+			// Update quest item as rewarded if the item has been awarded
+			if (rewarded) {
+				data.rewarded = true;
+				storeAlert(alert_type, alert_data);
+			}	
 		}
 	}
 	

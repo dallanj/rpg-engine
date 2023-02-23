@@ -1,22 +1,90 @@
 /**
-* Begin a quest
+* Check if the quest has been started or completed
 *
-* @param data (array)
+* @param data (object)
 *
 * @return boolean
 */
-function startQuest(data) {
-	if (!is_array(data) || !is_string(data[1]) || is_undefined(global.quests[$ data[1]])) {
-		return false;
+function questStatus(data) {
+	var result = false;
+	
+	// Get the quest data
+	var quest = getQuestById(data.quest);
+	
+	if (!quest) {
+		return result;
 	}
 	
+	// Check the status of the quest
+	if (data.started != noone) {
+		result = quest.started ? true : false;
+	}
+	
+	if (data.completed != noone) {
+		result = quest.completed ? true : false;
+	}
+	
+	return result;
+}
+
+/**
+* Begin a quest
+*
+* @param quest (string)
+*
+* @return boolean
+*/
+function startQuest(quest) {
 	// Return if player has already started the quest
-	if (global.quests[$ data[1]].started) {
+	if (quest.started) {
 		return false;
 	}
 	
-	global.quests[$ data[1]].started = true;
-	return true;
+	// Have all starting requirement conditions been met
+	var conditions_met = true;
+	
+	// List of the quest's rewards
+	var requirements = quest.starting_requirements;
+	
+	// Iterate over each requirement in the list
+	for (var i = 0; i < array_length(requirements); i++) {
+		var data = requirements[i];
+		
+		if (!data.valid) {
+			// Check if the player passed the requirement
+			var validated = false;
+			
+			// Type of requirement
+			var action = data.action;
+			
+			// Value of the requirement
+			var value = data.value;
+			
+			switch (action) {
+				case QuestController.QuestStatus:
+					// Has currency been awarded to the player
+					validated = questStatus(value);
+				break;
+			}
+			
+			// Set the starting requirement to validated
+			if (validated) {
+				data.valid = true;
+			} else {
+				// If atleast one condition hasn't been met then the player cant start the quest yet
+				conditions_met = false;	
+			}	
+		}
+	}
+	
+	// Start the quest if all starting requirements are met
+	if (conditions_met) {
+		quest.started = true;
+		array_push(global.quests, quest);
+		return true;
+	} else {
+		return false;
+	}
 };
 
 /**
@@ -27,18 +95,19 @@ function startQuest(data) {
 * @return array
 */
 function getQuestsByNpc(npc) {
-	var quests = [];
-	var keys = variable_struct_get_names(global.quests);
+	var quests = global.quests;
+	var results = [];
 	
 	// Find quests by NPC
-	for (var quest = 0; quest < array_length(keys); quest++) {
-		var current_key = keys[quest];
-		if (global.quests[$ current_key].npc == npc) {
-			array_push(quests, global.quests[$ current_key]);	
+	for (var i = 0; i < array_length(quests); i++) {
+		var quest = quests[i];
+		
+		if (quest.npc == npc) {
+			array_push(results, quest);	
 		}
 	}
 	
-	return quests;
+	return results;
 };
 
 /**
@@ -50,23 +119,40 @@ function getQuestsByNpc(npc) {
 */
 function claimRewards(items) {
 	// Try to claim all unclaimed rewards
-	for (var item = 0; item < array_length(items); item++) {
-		if (!items[item].rewarded) {
+	for (var i = 0; i < array_length(items); i++) {
+		var item = items[i];
+		
+		// Type of reward and it's action
+		var action = item.action;
+			
+		// Value of reward
+		var value = item.value;
+		
+		if (!item.rewarded) {
 			// Has the item been awarded to the player
-			var rewarded = updateInventory(items[item].item, items[item].quantity);
+			var result = updateInventory(value);
 							
 			// Update unclaimed item as rewarded if the item has been awarded
-			if (rewarded) {
-				items[item].rewarded = true;
-				// TODO: Alert player of dialog unlocks
+			if (is_struct(result)) {
+				
+				// TODO: item quantities are wrong 7+7+2+2 = 18 but alerted x35 red shells
+				
+				// TESTED THAT x25+1 RED SHELLS DISPLAYED AS x50 red shells. FIX THIS BUG
+				
+				item.rewarded = true;
+				storeAlert(action, result);
+			} else if (result) {
+				item.rewarded = true;
+				storeAlert(action, value);
 			}
+			
 		} else {
 			// Remove claimed reward from npc's unclaimed rewards
-			array_delete(items, item, 1);
+			array_delete(items, i, 1);
 		}
 	}
 	
-	return;
+	return items;
 };
 
 /**
@@ -78,19 +164,36 @@ function claimRewards(items) {
 */
 function claimQuestRewards(quests) {
 	// Check if quest is completed
-	for (var quest = 0; quest < array_length(quests); quest++) {
-		if (quests[quest].completed) {	
+	for (var i = 0; i < array_length(quests); i++) {
+		var quest = quests[i];
+		
+		if (quest.completed) {
+			var rewards = quest.rewards;
+			
 			// Check if any items have not been rewarded yet
-			for (var reward = 0; reward < array_length(quests[quest].rewards.items); reward++) {
-				if (!quests[quest].rewards.items[reward].rewarded) {
+			for (var j = 0; j < array_length(rewards); j++) {
+				var reward = rewards[j];
+				
+				// Type of reward and it's action
+				var action = reward.action;
+			
+				// Value of reward
+				var value = reward.value;
+				
+				if (!reward.rewarded && action == Action.UpdateInventory) {
 					// Has the item been awarded to the player
-					var rewarded = updateInventory(quests[quest].rewards.items[reward].item, quests[quest].rewards.items[reward].quantity);
-							
+					var result = updateInventory(value.item);
+					
 					// Update quest item as rewarded if the item has been awarded
-					if (rewarded) {
-						quests[quest].rewards.items[reward].rewarded = true;
-						// TODO: Alert player of dialog unlocks
-					}
+					if (is_struct(result)) {
+						
+						// TODO: item quantities are wrong 7+7+2+2 = 18 but alerted x35 red shells
+						reward.rewarded = true;
+						storeAlert(action, result);
+					} else if (result) {
+						reward.rewarded = true;
+						storeAlert(action, value.item);
+					}		
 				}
 			}
 		}
@@ -111,16 +214,23 @@ function hasUnclaimedQuestRewards(quests) {
 	var num_of_rewards = 0;
 	
 	// Find an open slot
-	var open_slot = GetOpenInventorySlot();
+	var open_slot = getOpenInventorySlot();
 	
 	// Don't reward player if there is no open inventory slot
 	if (is_undefined(open_slot)) {
 		// Check if quest is completed
-		for (var quest = 0; quest < array_length(quests); quest++) {
-			if (quests[quest].completed) {	
+		for (var i = 0; i < array_length(quests); i++) {
+			var quest = quests[i];
+			
+			if (quest.completed) {
+				// List of the quest's rewards
+				var rewards = quest.rewards;
+				
 				// Check if any items have not been rewarded yet
-				for (var item = 0; item < array_length(quests[quest].rewards.items); item++) {
-					if (!quests[quest].rewards.items[item].rewarded) {
+				for (var j = 0; j < array_length(rewards); j++) {
+					var reward = rewards[j];
+					
+					if (!reward.rewarded) {
 						num_of_rewards++;
 					}
 				}
@@ -139,17 +249,22 @@ function hasUnclaimedQuestRewards(quests) {
 * @return int
 */
 function hasUnclaimedRewards(items) {
+	var item;
+	
 	// Number of unclaimed rewards
 	var num_of_rewards = 0;
 	
 	// Find an open slot
-	var open_slot = GetOpenInventorySlot();
+	var open_slot = getOpenInventorySlot();
 	
 	// Don't reward player if there is no open inventory slot
 	if (is_undefined(open_slot)) {
+		
 		// Check if quest is completed
-		for (var item = 0; item < array_length(items); item++) {
-			if (!items[item].rewarded) {
+		for (var i = 0; i < array_length(items); i++) {
+			item = items[i];
+			
+			if (!item.rewarded) {
 				num_of_rewards++;
 			}
 		}
@@ -161,12 +276,41 @@ function hasUnclaimedRewards(items) {
 /**
 * Completes a quest and rewards the player
 *
+* @param key (enum)
+*
+* @return mixed
+*/
+function getQuestById(key) {
+	var quests = global.quests;
+	var result = false;
+	
+	for (var i = 0; i < array_length(quests); i++) {
+		var quest = quests[i];
+		
+		if (quests[i].id == key) {
+			result = quests[i];	
+			break;
+		}
+	}
+	
+	return result;
+};
+
+/**
+* Completes a quest and rewards the player
+*
 * @param data (array)
 *
 * @return void
 */
-function completeQuest(data) {
-	var quest = global.quests[$ data[1]];
+function completeQuest(key) {
+	var result = false;
+	
+	var quest = getQuestById(key);
+	
+	if (!quest) {
+		return result;
+	}
 	
 	// Update quest to completed
 	quest.completed = true;
@@ -174,75 +318,68 @@ function completeQuest(data) {
 	// List of the quest's rewards
 	var rewards = quest.rewards;
 	
-	// Iterate over each key in the quest_list struct
-	var keys = variable_struct_get_names(rewards);
-	
-	for (var i = 0; i < array_length(keys); i++) {
-	    // Get the current key
-	    var current_key = keys[i];
+	// Iterate over each reward in the list
+	for (var i = 0; i < array_length(rewards); i++) {
+		var reward = rewards[i];
 		
 		// Reward the player for quest completion
-		switch (current_key) {
-			case "currency":
-				if (rewards[$ current_key] != noone) {
-					if (!rewards[$ current_key].rewarded) {
-						// Has currency been awarded to the player
-						var rewarded = updateCurrency(rewards[$ current_key].quantity);
+		if (!reward.rewarded) {
+			var rewarded = false;
+			
+			// Type of reward and it's action
+			var action = reward.action;
+			
+			// Value of reward
+			var value = reward.value;
+			
+			// Data to be used for alert
+			var alert_data = value;
+			var alert_type = action;
+		
+			switch (action) {
+				case Action.UpdateCurrency:
+					// Has currency been awarded to the player
+					rewarded = updateCurrency(value);
+				break;
+				case Action.UnlockSlots:
+					// How many slots have been unlocked
+					var amount = unlockInventorySlots(value);
 						
-						// Update quest item as rewarded if currency has been awarded to the player
-						if (rewarded) {
-							rewards[$ current_key].rewarded = true;
-							StoreAlert("currency", rewards[$ current_key].quantity);
-						}
+					// Set the value of the reward to the number of slots unlocked
+					if (amount > 0) {
+						alert_data = amount;
+						rewarded = true;
 					}
-				}
-			break;
-			case "inventory":
-				if (rewards[$ current_key] != noone) {
-					if (!rewards[$ current_key].rewarded) {
-						// How many slots have been unlocked
-						var rewarded = unlockInventorySlots(rewards[$ current_key].quantity);
-						
-						// Update quest item as rewarded if any inventory slots have been unlocked
-						if (rewarded > 0) {
-							rewards[$ current_key].rewarded = true;
-							StoreAlert("inventory", rewarded);
-						}
+				break;
+				case Action.UpdateReputation:
+					// Has reputation been awarded to the player
+					rewarded = updateReputation(value);
+				break;
+				case Action.UpdateInventory:
+					// Has reputation been awarded to the player
+					result = updateInventory(value.item);
+					
+					if (!result) {
+						alert_data = value.npc.obj_data;
+						alert_type = Action.UnclaimedRewards;
+						storeAlert(alert_type, alert_data);
+					} else if (is_struct(result)) {
+						alert_data = result;
+						rewarded = true;
+					} else  {
+						alert_data = value.item;
+						rewarded = true;
 					}
-				}
-			break;
-			case "reputation":
-				if (rewards[$ current_key] != noone) {
-					if (!rewards[$ current_key].rewarded) {
-						// Has reputation been awarded to the player
-						var rewarded = updateReputation(rewards[$ current_key].quantity);
-						
-						// Update quest item as rewarded if reputation has been awarded to the player
-						if (rewarded) {
-							rewards[$ current_key].rewarded = true;
-							StoreAlert("reputation", rewards[$ current_key].quantity);
-						}
-					}
-				}
-			break;
-			case "items":
-				if (rewards[$ current_key] != noone) {
-					for (var items = 0; items < array_length(rewards[$ current_key]); items++) {
-						if (!rewards[$ current_key][items].rewarded) {
-							// Has the item been awarded to the player
-							var rewarded = updateInventory(rewards[$ current_key][items].item, rewards[$ current_key][items].quantity);
-							
-							// Update quest item as rewarded if the item has been awarded
-							if (rewarded) {
-								rewards[$ current_key][items].rewarded = true;
-								StoreAlert("items", rewards[$ current_key][items]);
-							}
-						}
-					}
-				}
-			break;
+				break;
+			}
+			
+			// Update quest item as rewarded if the item has been awarded
+			if (rewarded) {
+				reward.rewarded = true;
+				storeAlert(alert_type, alert_data);
+			}	
 		}
 	}
 	
-	return;
+	return quest;
 };

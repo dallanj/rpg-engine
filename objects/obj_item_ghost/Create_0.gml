@@ -1,3 +1,3 @@
 /// @description
-item = new Ghost();
+item = GHOST;
 depth = -bbox_bottom;

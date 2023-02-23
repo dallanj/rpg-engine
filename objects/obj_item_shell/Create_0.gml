@@ -1,4 +1,3 @@
 /// @description
-quantity = 1;
-item = new Shell(quantity);
+item = SHELL();
 depth = -bbox_bottom;
