@@ -14,7 +14,7 @@ if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), vw  + 
 
 // Choice selection dialog
 if (display_choices && (dialog_alpha >= max_alph)) {
-	for (var i = 0; i < array_length(data[text_current][5]); i++) {
+	for (var i = 0; i < array_length(data[text_current].choices); i++) {
 		// Input from player
 		var input = false;
 		
@@ -26,8 +26,8 @@ if (display_choices && (dialog_alpha >= max_alph)) {
 		}
 		
 		// Keybind choices - keyboard event
-		for (var j = 0; j < array_length(data[text_current][5]); j++) {
-			if (keyboard_check_pressed(ord(data[text_current][5][i][0]))) {
+		for (var j = 0; j < array_length(data[text_current].choices); j++) {
+			if (keyboard_check_pressed(ord(data[text_current].choices[i].choice))) {
 				input = true;
 			}
 		}
@@ -35,13 +35,13 @@ if (display_choices && (dialog_alpha >= max_alph)) {
 		// If player made a choice
 		if (input) {
 			// Run dialog scripts if there are any
-			if (data[text_current][5][i][3] != noone) {
-				runDialogScript(data[text_current][5][i][3]);	
+			if (data[text_current].choices[i].before != noone) {
+				runDialogScript(data[text_current].choices[i].before);	
 			}
 			
 			// Disable choice selection
 			display_choices = false;
-			test[text_current] = data[text_current][5][i][2];
+			test[text_current] = data[text_current].choices[i].dialog;
 			test[text_current] = string_wrap(test[text_current], text_width);
 			char_current = 0;
 		}

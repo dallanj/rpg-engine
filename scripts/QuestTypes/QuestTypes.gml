@@ -32,37 +32,14 @@ function bookReader () : questClass () constructor {
 			valid: false,
 		},
 	];
-	//requirements = [
-		//{
-		//	// item needed by an npc
-		//	action:
-		//	value: {
-		//		item: GHOST,
-		//		npc: npc,
-		//	},
-		//	dialog
-		//},
-		//{
-		//	// currency needed by an npc
-		//	currency
-		//},
-		//{
-		//	// slots needed for quest
-		//	slots
-		//},
-		//{
-		//	// reputation given by npc
-		//	reputation
-		//},
-		//{
-		//	// quests needed
-		//	quests
-		//},
-		//{
-		//	// time and day of the week to continue
-		//	time
-		//},
-	//];
+	// Mid quest requirements. Specific npcs and their dialog scripts will be included
+	requirements = [
+		// Items to be given or received by an npc at a specific point in the game/dialog
+		// Currency
+		// Time
+	];
+	// Requirements to complete a quest
+	completing_requirements = [];
 	rewards = [
 		{
 			action: Action.UpdateCurrency,
@@ -91,8 +68,6 @@ function bookReader () : questClass () constructor {
 			rewarded: false
 		},
 	];
-	
-	// Ideas: Run scripts on quest start, and quest completion, and when a checkpoint is reached
 }
 
 function computerStarter () : questClass () constructor {

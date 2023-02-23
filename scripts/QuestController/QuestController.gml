@@ -131,7 +131,6 @@ function startQuest(quest) {
 				case QuestController.CompareDates:
 					// Has currency been awarded to the player
 					validated = compareDates(value);
-					show_message(validated);
 				break;
 			}
 			

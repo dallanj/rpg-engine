@@ -8,5 +8,7 @@ function questClass () constructor {
 	started = false;
 	npc = "";
 	starting_requirements = [];
+	requirements = [];
+	completing_requirements = [];
 	rewards = [];
 }

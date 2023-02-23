@@ -53,7 +53,8 @@ function npcStateIdle(event, stateLayer) {
 							dialog.text_last = array_length(self.obj_data.dialog_script[self.obj_data.dialog_current]) - 1;
 							for (i = 0; i <= dialog.text_last; i++) {
 								dialog.data[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i];
-								dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i][2];
+								//dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i][2];
+								dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i].dialog;
 							}
 						}
 					}

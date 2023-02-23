@@ -1,13 +1,13 @@
 // Draw characters speaking on the left side
 if (has_right_character) {
-	draw_sprite_ext(data[text_current][6], 0, vw - 700, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
+	draw_sprite_ext(data[text_current].sprite, 0, vw - 700, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
 }
 
 // Draw characters speaking on the left side
 draw_sprite_ext(spr_dialog_daniel, 0, vw + 160, view_yport[0], character_scale, character_scale, 0, -1, dialog_alpha);
 
 // Draw dialog box
-if (data[text_current][1] == "right") {
+if (data[text_current].position == "right") {
 	draw_sprite_ext(spr_dialog_box, 0, vw  - (dialog_width / 2), vh + 100, dialog_scale, dialog_scale, 0, -1, dialog_alpha);	
 	draw_sprite_ext(spr_dialog_name_tag, 0, vw  - (dialog_width / 2) + 70, vh + 95, 0.75, 0.75, 0, -1, dialog_alpha);
 } else {
@@ -21,10 +21,10 @@ if (display_choices == false) {
 
 // Draw name
 draw_set_font(name_font);
-if (data[text_current][1] == "right") {
-	draw_text_ext_color(vw  - (dialog_width / 2) + 110, vh + 105, data[text_current][0], text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
+if (data[text_current].position == "right") {
+	draw_text_ext_color(vw  - (dialog_width / 2) + 110, vh + 105, data[text_current].name, text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
 } else {
-	draw_text_ext_color(vw + 180, vh + 105, data[text_current][0], text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
+	draw_text_ext_color(vw + 180, vh + 105, data[text_current].name, text_height + 14, dialog_width - 80, name_color, name_color, name_color, name_color, dialog_alpha);
 }
 
 // Draw text
@@ -33,8 +33,8 @@ draw_set_color(c_white);
 if (dialog_alpha >= max_alph) {
 	if (display_choices) {
 		// Draw dialog script choices
-		for (i = 0; i < array_length(data[text_current][5]); i++) {
-			draw_text(text_x, text_y + (i * 32),string(data[text_current][5][i][0]) + ". " + string(data[text_current][5][i][1]));
+		for (i = 0; i < array_length(data[text_current].choices); i++) {
+			draw_text(text_x, text_y + (i * 32),string(data[text_current].choices[i].choice) + ". " + string(data[text_current].choices[i].response));
 		}
 	} else {
 		// Draw normal dialog

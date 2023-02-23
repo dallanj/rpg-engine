@@ -37,7 +37,7 @@ function skipDialog() {
 		} else {
 			// Choice based dialog
 			if (test[text_current] == noone) {
-				if (data[text_current][5] == noone) {
+				if (data[text_current].choices == noone) {
 					instance_destroy(self);	
 				} else {
 					// Enabled choice selection
@@ -66,6 +66,8 @@ function runDialogScript(dialog_script) {
 		return false;	
 	}
 	
+	show_message(dialog_script);
+	
 	// Run multiple functions from the dialog script data
 	for (var i = 0; i < array_length(dialog_script); i++) {
 		var data = dialog_script[i]
@@ -88,7 +90,11 @@ function runDialogScript(dialog_script) {
 			switch (action) {
 				case Action.StartQuest:
 					rewarded = startQuest(value);
-					show_debug_message(rewarded);
+					
+					if (!rewarded) {
+						break;
+						
+					}
 				break;
 				case Action.CompleteQuest:
 					var quest = completeQuest(value);
@@ -100,6 +106,7 @@ function runDialogScript(dialog_script) {
 				break;
 				case Action.UnlockDialog:
 					rewarded = unlockDialog(value);
+					//show_message(rewarded);
 					
 					alert_data = value.npc.obj_data;
 				break;
@@ -150,7 +157,7 @@ function runDialogScript(dialog_script) {
 			if (rewarded) {
 				data.rewarded = true;
 				storeAlert(alert_type, alert_data);
-			}	
+			}
 		}
 	}
 	
