@@ -1,9 +1,9 @@
 /// @description Init HUD settings
 global.max_days = 7; // Max amount of days allowed per game
-global.total_days = 6;
-global.day = 5; // Monday = 0
-global.hours = 22; // Hours 0 - 24
-global.minutes = 60; // Minutes 0 - 60
+global.total_days = 0;
+global.day = 0; // Monday = 0
+global.hours = 20; // Hours 0 - 24
+global.minutes = 0; // Minutes 0 - 60
 global.reputation = 100; // Reputation 0-100
 global.currency = 0; // # of dollars
 global.alerts_top = ds_list_create();

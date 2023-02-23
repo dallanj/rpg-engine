@@ -13,8 +13,13 @@ enum Action {
 
 enum QuestController {
 	QuestStatus,
+	CompareDates
 	//StartQuest,
 	//CompleteQuest,
+}
+
+enum DateController {
+	//CompareDates,
 }
 
 enum Item {

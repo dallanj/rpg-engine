@@ -7,12 +7,27 @@ function bookReader () : questClass () constructor {
 	npc = obj_npc_sarah;
 	starting_requirements = [
 		{
-			// quests needed to start
+			// Other quests needed to have started or completed
 			action: QuestController.QuestStatus,
 			value: {
 				quest: Quest.ComputerStarter,
 				started: noone,
 				completed: true
+			},
+			valid: false,
+		},
+		{
+			// Minimum/maximum time to start the quest
+			action: QuestController.CompareDates,
+			value: {
+				// Can begin quest after start date
+				start_date: {
+					day: 0,
+					hours: 4,
+					minutes: 30
+				},
+				// Can begin quest before end date
+				end_date: noone,
 			},
 			valid: false,
 		},

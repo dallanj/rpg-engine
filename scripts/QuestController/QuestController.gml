@@ -1,4 +1,67 @@
 /**
+* Check if the quest is in between minimum start date and or maximum end date
+*
+* @param data (object)
+*
+* @return boolean
+*/
+function compareDates(data) {
+	var result = false;
+	var start_date = data.start_date;
+	var end_date = data.end_date;
+	
+	// Compare day, hours, or minutes. Returns boolean or boolean/noone
+	var compare = function(value, compared_to, starting = true, boolean = false) {
+		var result;
+			
+		if (value < compared_to) {
+			result = starting ? true : false;
+		} else if (value > compared_to) {
+			result = starting ? false : true;
+		} else {
+			// Return boolean or noone
+			result = boolean ? true : noone;
+		}
+			
+		return result;
+	};
+	
+	// MIN Starting date compared to today
+	if (start_date != noone) {
+		// Compare the starting day with today
+		result = compare(start_date.day, global.day);
+		
+		// Compare the hours if starting day is today
+		if (result == noone) {
+			result = compare(start_date.hours, global.hours);
+		}
+		
+		// Compare the minutes if the starting hour is todays hour
+		if (result == noone) {
+			result = compare(start_date.minutes, global.minutes, true);
+		}
+	}
+	
+	// MAX Ending date compared to today
+	if (end_date != noone) {
+		// Compare the starting day with today
+		result = compare(end_date.day, global.day, false);
+		
+		// Compare the hours if starting day is today
+		if (result == noone) {
+			result = compare(end_date.hours, global.hours, false);
+		}
+		
+		// Compare the minutes if the starting hour is todays hour
+		if (result == noone) {
+			result = compare(end_date.minutes, global.minutes, false, true);
+		}
+	}
+	
+	return result;
+}
+
+/**
 * Check if the quest has been started or completed
 *
 * @param data (object)
@@ -64,6 +127,11 @@ function startQuest(quest) {
 				case QuestController.QuestStatus:
 					// Has currency been awarded to the player
 					validated = questStatus(value);
+				break;
+				case QuestController.CompareDates:
+					// Has currency been awarded to the player
+					validated = compareDates(value);
+					show_message(validated);
 				break;
 			}
 			
