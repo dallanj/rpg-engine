@@ -11,8 +11,8 @@ function bookReader () : questClass () constructor {
 			action: QuestController.QuestStatus,
 			value: {
 				quest: Quest.ComputerStarter,
-				started: noone,
-				completed: true
+				started: true,
+				completed: noone,
 			},
 			valid: false,
 		},

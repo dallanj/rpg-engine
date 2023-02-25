@@ -30,7 +30,7 @@ if (data[text_current].position == "right") {
 // Draw text
 draw_set_font(dialog_font);
 draw_set_color(c_white);
-if (dialog_alpha >= max_alph) {
+if (dialog_alpha >= max_alph && before_scripts) {
 	if (display_choices) {
 		// Draw dialog script choices
 		for (i = 0; i < array_length(data[text_current].choices); i++) {

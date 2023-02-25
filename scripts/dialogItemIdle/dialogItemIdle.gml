@@ -44,15 +44,21 @@ function dialogItemIdle(event, stateLayer) {
 						var total_rewards = num_of_quest_rewards + num_of_rewards;
 						
 						if (total_rewards > 0) {
-							var msg = "You have unclaimed rewards, come back when you have " + string(total_rewards) + " inventory spaces.";
-							dialog.text_last = 0;
-							dialog.data[0] = ["Daniel Lim","right",msg,noone,noone,noone,spr_dialog_daniel];
-							dialog.test[0] = msg;
+							var request = {
+								dialog_type: Action.UnclaimedRewards,
+								dialog_data: total_rewards,
+								npc_state: {
+									generic_dialog: self.obj_data.generic_dialog,
+									dialog: dialog,
+								},
+							}
+							switchToGenericDialog(request);
 						} else {
 							dialog.text_last = array_length(self.obj_data.dialog_script[self.obj_data.dialog_current]) - 1;
 							for (i = 0; i <= dialog.text_last; i++) {
 								dialog.data[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i];
-								dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i][2];
+								dialog.test[i] = self.obj_data.dialog_script[self.obj_data.dialog_current][i].dialog;
+								dialog.obj_data = self.obj_data;
 							}
 						}
 					}

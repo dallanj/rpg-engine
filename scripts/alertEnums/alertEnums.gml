@@ -9,6 +9,8 @@ enum Action {
 	UnclaimedRewards,
 	StartQuest,
 	CompleteQuest,
+	NextDialogLine,
+	EndDialog,
 }
 
 enum QuestController {

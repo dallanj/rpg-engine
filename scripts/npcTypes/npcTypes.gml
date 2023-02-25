@@ -49,6 +49,46 @@ function Sarah () : Npc () constructor {
 	//[Action.UnlockDialog,obj_npc,script_index,unlocked (boolean)],
 	//[Action.CompleteQuest,"read_a_book",false]
 	//]
+	// General dialog scripts
+	// General dialog scripts
+	generic_dialog[Action.StartQuest][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "Sorry but you cant start that quest yet",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
+	generic_dialog[Action.StartQuest][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "Okay I'll come back later",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
+	// General dialog scripts
+	generic_dialog[Action.UnclaimedRewards][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "You have unclaimed rewards, come back when you have XX inventory spaces.",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_mother,
+		
+	};
+	generic_dialog[Action.UnclaimedRewards][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "Okay I'll come back later",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
 	
 	// Script 1 - Start journal quest
 	dialog_script[0][0] = {
@@ -83,28 +123,61 @@ function Sarah () : Npc () constructor {
 		position: "left",
 		before: [
 			{action: Action.StartQuest, value: BOOK_READER, rewarded: false},
-			{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_journal}, rewarded: false}
 		],
 		dialog: "Come back when you have read it.",
+		after: [
+			{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_journal}, rewarded: false}
+		],
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
+	
+	// Complete quest - triggered by dialog item journal
+	dialog_script[1][0] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "I read my book mom, do I get a reward?",
 		after: noone,
 		choices: noone,
 		sprite: spr_dialog_mother,
 	};
-	//dialog_script[0][1] = [name,"left","Have you read your journal?",noone,noone,noone,spr_dialog_mother];
-	//dialog_script[0][2] = ["Daniel Lim","right","I have not",noone,noone,noone,spr_dialog_mother];
-	//dialog_script[0][3] = [name,"left","Come back when you have read it.",[
-	//	{action: Action.StartQuest, value: BOOK_READER, rewarded: false},
-	//	{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_journal}, rewarded: false}],noone,noone,spr_dialog_mother];
-	//// Script 2 - Completing journal quest
-	//dialog_script[1][0] = ["Daniel Lim","right","I read my journal",noone,noone,noone,spr_dialog_mother];
-	//dialog_script[1][1] = [name,"left","Great!!!",[
-	//	{action: Action.CompleteQuest, value: Quest.BookReader, rewarded: false},
-	//	{action: Action.UpdateCurrency, value: 1000, rewarded: false},
-	//	{action: Action.UnlockDialog, value: { dialog: 2, npc: obj_dialog_daniel_journal}, rewarded: false},
-	//	{action: Action.UnlockDialog, value: { dialog: 2, npc: obj_npc_sarah}, rewarded: false},],noone,noone,spr_dialog_mother];
-	//// Script 3 - Basic dialog after quest completion
-	//dialog_script[2][0] = [name,"left","Hi Daniel",[{action: Action.UpdateReputation, value: 1000, rewarded: false}],noone,noone,spr_dialog_mother];
-	//dialog_script[2][1] = ["Daniel Lim","right","Hi Sarah",[{action: Action.UnlockSlots, value: 3, rewarded: false}],noone,noone,spr_dialog_mother];
+	dialog_script[1][1] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "That's great, here is a reward for your obedience",
+		after: [
+			{action: Action.CompleteQuest, value: Quest.BookReader, rewarded: false},
+			{action: Action.UpdateCurrency, value: 1000, rewarded: false},
+			{action: Action.UnlockDialog, value: { dialog: 2, npc: obj_dialog_daniel_journal}, rewarded: false},
+			{action: Action.UnlockDialog, value: { dialog: 2, npc: obj_npc_sarah}, rewarded: false},
+		],
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
+	
+	// After completing the quest
+	dialog_script[1][0] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "Hey mom can I get an allowance?",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
+	dialog_script[1][1] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "No but I'll take your computer away from you if you keep asking me",
+		after: [
+			{action: Action.UpdateReputation, value: -25, rewarded: false},
+		],
+		choices: noone,
+		sprite: spr_dialog_mother,
+	};
 }
 
 function Bob () : Npc () constructor {
@@ -115,6 +188,47 @@ function Bob () : Npc () constructor {
 	dialog_sprite = spr_dialog_luna;
 	sprites = frames.S;
 	dialog_current = 0; // Active script unlocked
+	
+	// General dialog scripts
+	generic_dialog[Action.StartQuest][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "Sorry but you cant start that quest yet",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	generic_dialog[Action.StartQuest][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "Okay I'll come back later",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	// General dialog scripts
+	generic_dialog[Action.UnclaimedRewards][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "You have unclaimed rewards, come back when you have XX inventory spaces.",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	generic_dialog[Action.UnclaimedRewards][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "Okay I'll come back later",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,	
+	};
+	
+	//Action.UnclaimedRewards
 	
 	// Script 1 - Start the turn on computer quest
 	dialog_script[0][0] = {
@@ -131,96 +245,163 @@ function Bob () : Npc () constructor {
 		position: "right",
 		before: noone, // Scripts to run before dialog is shown - Check if quest can be started, change dialog if not
 		dialog: noone,
-		after: noone // Scripts to run after dialog is shown,
+		after: noone, // Scripts to run after dialog is shown,
 		choices: [
 			{
+				// TODO: Each choice can trigger a different follow up script for the npc
 				choice: 1,
 				response: "Yes",
-				before: [
-					{action: Action.StartQuest, value: COMPUTER_STARTER, rewarded: false},
-					{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_computer}, rewarded: false},
-					{action: Action.UnlockDialog, value: { dialog: 2, npc: object}, rewarded: false}
-				],
+				before: noone,
 				dialog: "Yes I will",
-				after: noone,
+				after: [
+					// NEXT LINE OF DIALOG [0][2]
+					{action: Action.NextDialogLine, value: { dialog: 2, npc: object}, rewarded: false},
+				],
 			},
 			{
 				choice: 2,
 				response: "Not right now",
-				before: [
-					{action: Action.StartQuest, value: COMPUTER_STARTER, rewarded: false},
-					{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_computer}, rewarded: false},
-					{action: Action.UnlockDialog, value: { dialog: 2, npc: object}, rewarded: false}
-				],
+				before: noone,
 				dialog: "Maybe I will later",
-				after: noone,
+				after: [
+					// NEXT LINE OF DIALOG [0][3]
+					{action: Action.NextDialogLine, value: { dialog: 3, npc: object}, rewarded: false},
+				],
 			},
 			{
 				choice: 3,
 				response: "Never",
-				before: [
-					{action: Action.UnlockDialog, value: { dialog: 1, npc: object}, rewarded: false}
-				],
+				before: noone,
 				dialog: "I will never!",
-				after: noone,
+				after: [
+					// NEXT LINE OF DIALOG [0][4]
+					{action: Action.NextDialogLine, value: { dialog: 4, npc: object}, rewarded: false},
+				],
 			},
 		],
 		sprite: spr_dialog_luna,
 	};
+	
+	// Decision dialogs based on choice selection
 	dialog_script[0][2] = {
 		name: name,
 		position: "left",
+		before: [
+			{action: Action.StartQuest, value: COMPUTER_STARTER, rewarded: false},
+			{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_computer}, rewarded: false},
+			{action: Action.UnlockDialog, value: { dialog: 2, npc: object}, rewarded: false},
+		],
+		dialog: "Great, thanks!",
+		after: [
+			{action: Action.EndDialog, value: noone, rewarded: false}
+		],
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	dialog_script[0][3] = {
+		name: name,
+		position: "left",
 		before: noone,
-		dialog: "Ok",
+		dialog: "No problem, come back later then",
+		after: [
+			{action: Action.EndDialog, value: noone, rewarded: false},
+		],
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	dialog_script[0][4] = {
+		name: name,
+		position: "left",
+		before: [
+			{action: Action.UpdateReputation, value: -25, rewarded: false},
+			{action: Action.UnlockDialog, value: { dialog: 1, npc: object}, rewarded: false},
+		],
+		dialog: "That was rude, you should be nice to your elders",
+		after: [
+			{action: Action.EndDialog, value: noone, rewarded: false},
+		],
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	
+	// Script 2 - If player choses the wrong answer, they cant start the quest
+	dialog_script[1][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "Get out of my face!!!",
 		after: noone,
 		choices: noone,
 		sprite: spr_dialog_luna,
 	};
-	//dialog_script[0][0] = [name,"left","Can you turn on your computer for me?",noone,noone,noone,spr_dialog_luna];
-	//dialog_script[0][1] = ["Daniel Lim","right",noone,noone,noone,
-	//[
-	//	[1,"Yes","Yes I will",[
-	//		{action: Action.StartQuest, value: COMPUTER_STARTER, rewarded: false},
-	//		{action: Action.UnlockDialog, value: { dialog: 1, npc: obj_dialog_daniel_computer}, rewarded: false},
-	//		{action: Action.UnlockDialog, value: { dialog: 2, npc: object}, rewarded: false}
-	//	]],
-	//	[2,"Not right now","I will later",noone],
-	//	[3,"Fuck off","NOPE!",[
-	//		{action: Action.UnlockDialog, value: { dialog: 1, npc: object}, rewarded: false}
-	//	]],
-	//],
-	//spr_dialog_luna
-	//];
-	//dialog_script[0][2] = [name,"left","Ok",noone,noone,noone,spr_dialog_luna];
+	// Script 3 - Mid quest dialog
+	dialog_script[2][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "Did you turn on computer yet?",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	dialog_script[2][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "No not yet, I will turn it on now",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
 	
-	//// Script 2 - If player choses the wrong answer, they cant start the quest
-	//dialog_script[1][0] = [name,"left","Go away",[{action: Action.UpdateInventory,value:{item: TOAD,npc:object},rewarded: false},{action: Action.UpdateInventory,value:{item: GHOST,npc:object},rewarded: false}],noone,noone,spr_dialog_luna];
+	// Script 4 - Complete computer quest
+	dialog_script[3][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "Thanks for using your computer!",
+		after: [
+			{action: Action.CompleteQuest, value: Quest.ComputerStarter, rewarded: false},
+			{action: Action.UnlockDialog, value: { dialog: 2, npc: obj_dialog_daniel_computer}, rewarded: false},
+		],
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	dialog_script[3][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "No problem!",
+		after: [
+			{action: Action.UnlockDialog, value: { dialog: 4, npc: object}, rewarded: false},
+			{action: Action.UpdateCurrency, value: 1000, rewarded: false},
+			{action: Action.UpdateReputation, value: 25, rewarded: false},
+			{action: Action.UpdateInventory, value: { item: GHOST, npc: object}, rewarded: false},
+			{action: Action.UpdateInventory, value: { item: TOAD, npc: object}, rewarded: false},
+			{action: Action.UpdateInventory, value: { item: TOAD, npc: object}, rewarded: false},
+			{action: Action.UpdateInventory, value: { item: SHELL(10), npc: object}, rewarded: false},
+		],
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
 	
-	//// Script 3 - Mid quest dialog
-	//dialog_script[2][0] = [name,"left","Did you turn on computer yet?",noone,noone,noone,spr_dialog_luna];
-	//dialog_script[2][1] = ["Daniel Lim","right","No not yet",noone,noone,noone,spr_dialog_luna];
-	
-	//// Script 4 - Complete computer quest
-	//dialog_script[3][0] = [name,"left","Thanks for using your computer!",[{action: Action.CompleteQuest, value: Quest.ComputerStarter, rewarded: false},{action: Action.UnlockDialog, value: { dialog: 2, npc: obj_dialog_daniel_computer}, rewarded: false}],noone,noone,spr_dialog_luna];
-	//dialog_script[3][1] = ["Daniel Lim","right","No problem!",[{action: Action.UnlockDialog, value: { dialog: 4, npc: object}, rewarded: false}],noone,noone,spr_dialog_luna];
-	
-	//// Script 5 - Regular dialog after quest complete
-	//dialog_script[4][0] = [name,"left","Hey Daniel",[{
-	//		action: Action.UpdateInventory,
-	//		value: {
-	//			item: SHELL(7),
-	//			npc: object,
-	//		},
-	//		rewarded: false
-	//	},{
-	//		action: Action.UpdateInventory,
-	//		value: {
-	//			item: SHELL(7),
-	//			npc: object,
-	//		},
-	//		rewarded: false
-	//	}],noone,noone,spr_dialog_luna];
-	//dialog_script[4][1] = ["Daniel Lim","right","Hey Bob",noone,noone,noone,spr_dialog_luna];
-	
-	
+	// Script 5 - Regular dialog after quest complete
+	dialog_script[4][0] = {
+		name: name,
+		position: "left",
+		before: noone,
+		dialog: "Hello Daniel, how are you doing?",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
+	dialog_script[4][1] = {
+		name: "Daniel Lim",
+		position: "right",
+		before: noone,
+		dialog: "I'm alright, thank you",
+		after: noone,
+		choices: noone,
+		sprite: spr_dialog_luna,
+	};
 }

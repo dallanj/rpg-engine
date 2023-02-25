@@ -22,10 +22,11 @@ vw = view_xport[0] + view_wport[0] / 2;
 vh = view_yport[0] + view_hport[0] / 2;
 
 // Type writer text
+data[0] = noone;
 test[0] = "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 text_current = 0;
 text_last = 0;
-text_width = 300;
+text_width = string_width(test[text_current]);
 text_x = vw  - (dialog_width / 2) + 80;
 text_y = vh + 170;
 char_current = 1;
@@ -36,3 +37,7 @@ text[text_current] = string_wrap(test[text_current], text_width);
 dialog_alpha = 0;
 max_alph = 1;
 alph_timer = .03;
+
+before_scripts = false;
+after_scripts = false;
+selected_choice = noone;

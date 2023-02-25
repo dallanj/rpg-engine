@@ -70,7 +70,6 @@ function compareDates(data) {
 */
 function questStatus(data) {
 	var result = false;
-	
 	// Get the quest data
 	var quest = getQuestById(data.quest);
 	
@@ -127,10 +126,12 @@ function startQuest(quest) {
 				case QuestController.QuestStatus:
 					// Has currency been awarded to the player
 					validated = questStatus(value);
+					if (!validated) break;
 				break;
 				case QuestController.CompareDates:
 					// Has currency been awarded to the player
 					validated = compareDates(value);
+					if (!validated) break;
 				break;
 			}
 			

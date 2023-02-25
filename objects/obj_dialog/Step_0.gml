@@ -34,16 +34,29 @@ if (display_choices && (dialog_alpha >= max_alph)) {
 		
 		// If player made a choice
 		if (input) {
+			// Save the selected choice number to be used in skipDialog()
+			selected_choice = i;
+			
 			// Run dialog scripts if there are any
-			if (data[text_current].choices[i].before != noone) {
-				runDialogScript(data[text_current].choices[i].before);	
+			if (data[text_current].choices[selected_choice].before != noone) {
+				before_scripts = runDialogScript(data[text_current].choices[selected_choice].before);
+				
+				// Generic scripts consist of dialog stating the player can't start a quest or has unclaimed rewards
+				if (is_struct(before_scripts)) {
+					switchDialog(before_scripts);
+				}
+			} else {
+				before_scripts = true;
 			}
 			
-			// Disable choice selection
-			display_choices = false;
-			test[text_current] = data[text_current].choices[i].dialog;
-			test[text_current] = string_wrap(test[text_current], text_width);
-			char_current = 0;
+			if (before_scripts) {
+				// Disable choice selection
+				display_choices = false;
+				test[text_current] = data[text_current].choices[selected_choice].dialog;
+				text_width = string_width(test[text_current]);
+				test[text_current] = string_wrap(test[text_current], text_width);
+				char_current = 0;
+			}
 		}
 	}
 }
