@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "dialogItemIdle",
+  "name": "MapController",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dialog Items",
-    "path": "folders/Scripts/Controllers/Dialog Items.yy",
+    "name": "Controllers",
+    "path": "folders/Scripts/Controllers.yy",
   },
 }

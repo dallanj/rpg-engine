@@ -1,4 +1,10 @@
 global.quests = [];
+global.maps = [];
+
+enum Map {
+	DanielsRoom,
+	LimHouse,
+}
 
 enum Action {
 	UpdateCurrency,
