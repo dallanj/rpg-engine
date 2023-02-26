@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Controllers",
-    "path": "folders/Scripts/NPCs/Controllers.yy",
+    "name": "NPCs",
+    "path": "folders/Scripts/Controllers/NPCs.yy",
   },
 }

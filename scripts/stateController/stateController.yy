@@ -6,6 +6,6 @@
   "isCompatibility": false,
   "parent": {
     "name": "State Memory",
-    "path": "folders/Scripts/State Memory.yy",
+    "path": "folders/Scripts/Controllers/State Memory.yy",
   },
 }

@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_quest_controller",
+  "name": "obj_map_controller",
   "spriteId": null,
   "solid": false,
   "visible": true,
@@ -21,13 +21,11 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,},
-  ],
+  "eventList": [],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Quests",
-    "path": "folders/Objects/Quests.yy",
+    "name": "Controllers",
+    "path": "folders/Objects/Controllers.yy",
   },
 }

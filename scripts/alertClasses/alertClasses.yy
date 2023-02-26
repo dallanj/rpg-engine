@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Alerts",
-    "path": "folders/Scripts/Alerts.yy",
+    "name": "Classes",
+    "path": "folders/Scripts/Classes.yy",
   },
 }

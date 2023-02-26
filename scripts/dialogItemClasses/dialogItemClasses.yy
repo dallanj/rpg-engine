@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Dialog Items",
-    "path": "folders/Scripts/Dialog Items.yy",
+    "name": "DialogItems",
+    "path": "folders/Scripts/Classes/DialogItems.yy",
   },
 }

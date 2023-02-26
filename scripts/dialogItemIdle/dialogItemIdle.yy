@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Controllers",
-    "path": "folders/Scripts/Dialog Items/Controllers.yy",
+    "name": "DialogItems",
+    "path": "folders/Scripts/Controllers/DialogItems.yy",
   },
 }

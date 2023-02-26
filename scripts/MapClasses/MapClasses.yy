@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "alertEnums",
+  "name": "MapClasses",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Alerts",
-    "path": "folders/Scripts/Alerts.yy",
+    "name": "Maps",
+    "path": "folders/Scripts/Classes/Maps.yy",
   },
 }

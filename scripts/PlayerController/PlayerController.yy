@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "characterFunctions",
+  "name": "PlayerController",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "CharacterControllers",
-    "path": "folders/Scripts/CharacterControllers.yy",
+    "name": "Controllers",
+    "path": "folders/Scripts/Controllers.yy",
   },
 }

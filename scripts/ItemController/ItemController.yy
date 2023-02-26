@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "save_data_get_key",
+  "name": "ItemController",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "Controllers",
+    "path": "folders/Scripts/Controllers.yy",
   },
 }

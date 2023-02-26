@@ -6,6 +6,6 @@
   "isCompatibility": false,
   "parent": {
     "name": "NPCs",
-    "path": "folders/Scripts/NPCs.yy",
+    "path": "folders/Scripts/Classes/NPCs.yy",
   },
 }
