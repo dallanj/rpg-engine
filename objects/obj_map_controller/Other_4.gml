@@ -24,6 +24,5 @@ if (!getMapById(room)) {
 	global.maps[room] = new_map;
 	//show_message(global.maps);
 } else {
-	show_message("exists");
-	show_message(global.maps);
+
 }

@@ -12,8 +12,8 @@ function getMapById(key) {
 	for (var i = 0; i < array_length(maps); i++) {
 		var map = maps[i];
 		
-		if (maps[i].id == key) {
-			result = maps[i];	
+		if (map.id == key) {
+			result = map;	
 			break;
 		}
 	}

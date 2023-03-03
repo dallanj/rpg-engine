@@ -105,7 +105,6 @@ function skipDialog() {
 		
 		// Get the scripts that need to run after text is displayed
 		if (selected_choice != noone) {
-			//show_message("RUN");
 			after_scripts_to_run = data[text_current].choices[selected_choice].after;
 		} else {
 			after_scripts_to_run = data[text_current].after;
@@ -117,8 +116,6 @@ function skipDialog() {
 		} else {
 			after_scripts = true;
 		}
-		
-		//show_message(after_scripts);
 		
 		if (after_scripts != false) {		
 			// Set the next line in the dialog
