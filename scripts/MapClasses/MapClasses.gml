@@ -18,13 +18,12 @@ function mapClass(map_id, map_name) {
 		//	// - Create, read, update, delete controller for instances in a map
 		//	// - Function to update another maps instances from a different room
 		//},
-		//instances: [
-		//	//{
-		//	//	instance: data,
-		//	//	coords: [x, y],
-		//	//	persistant: true, // Does the instance stay persistance upon re-entering the map
-		//	//}
-		//],
+		instances: [
+			//{
+			//	instance: noone,
+			//	coords: [],
+			//}
+		],
 		//starting_requirements: [], // Requirements to unlock the map
 		//completing_requirements: [ // Requirements to complete the map
 		//	// Quests, currency, reputation, items, dialog, time

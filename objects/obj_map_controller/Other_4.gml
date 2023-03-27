@@ -1,10 +1,4 @@
-//show_message("ROOM START :" + string(room_get_name(room)));
-
-//show_message("ROOM START :" + string(room));
-
-
 if (!getMapById(room)) {
-	//show_message("NOT EXIST");
 	var new_map = mapClass(room, room_get_name(room));
 	var description;
 	
@@ -22,7 +16,10 @@ if (!getMapById(room)) {
 	
 	// Store map within players unlocked maps memory
 	global.maps[room] = new_map;
-	//show_message(global.maps);
 } else {
-
+	// Delete all items on room start
+	destroyChildInstances([obj_item_controller]);
+	
+	// Spawn all items with their new coordinates and data saved in global maps array
+	createMapInstances(global.maps[room].instances, "Instances");
 }
